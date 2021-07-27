@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('partials/links') %> 
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/login.css">
+    <title>QuickAid - Login</title>
+</head>
+<body>
+
+    <div class="container">
+        <div class="form">
+            <div class="heading">
+                <h2> QuickAid <i class="fas fa-briefcase-medical"></i></h2>
+            </div>
+            <form action="http://localhost:3000/login" method="POST">
+            
+                <div class="username">
+                    <label for="username">Username:</label>
+                    <input type="text" id="username" name="username" 
+                    placeholder="username" required>  
+                </div>
+                <div class="password">
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="password"
+                    placeholder="password" required>  
+                </div>
+
+                <small>The email or password you entered is incorrect.</small>
+
+                <button class="login_btn" type="submit"> Login </button>
+            </form>
+        </div>
+
+    </div>
+
+   
+    
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Volunteer</title>
+</head>
+<body>
+
+    <h1>Edit Volunteer</h1>
+
+    <form action="/volunteers/<%=volunteer._id%>/?_method=PUT" method="POST">
+        <label for="name">Firts name</label>
+        <input type="text" id="name" name="name" placeholder="first name" value="<%= volunteer.firstName %>">
+        <label for="lastname">Last name</label>
+        <input type="text" id="lastname" name="lastName" placeholder="last name" value="<%= volunteer.lastName %>">
+        <label for="phone">Phone</label>
+        <input type="number" id="phone" name="phone" placeholder="phone" value="<%= volunteer.phone %>">
+        
+        <button>submit</button>
+    </form>
+
+    <a href="/volunteers/<%= volunteer._id %> ">Cancel</a>
+    
+</body>
+</html>
