@@ -7,19 +7,28 @@ const execute = () =>{
     const router = require('./Router/routes');
     const mongoose = require('mongoose');
     const methodOverride = require('method-override');
-    const Volunteer = require('./Models/volunteer');
+    const Volunteer = require('./models/volunteer');
+    const ejsMate = require('ejs-mate');
+    const catchAsync = require('./helpers/catchAsync')
+    const ExpressError = require('./helpers/ExpressError');
+    const {registerValidation} = require('./helpers/joiValidation');
+
     const port = process.env.PORT || 3030;
 
 
+    app.engine('ejs', ejsMate);
 
     app.set('views', path.join(__dirname, '/views'));
     app.set('view engine', 'ejs');
+
+    mongoose.set('useFindAndModify', false);
 
     app.use(express.static(path.join(__dirname, '/public')));
     app.use(express.json());
     app.use(express.urlencoded({extended: true}))
     app.use(router);
     app.use(methodOverride('_method'));
+    
     
     //Connect to the DB
     mongoose.connect(process.env.DATABASE, 
@@ -42,36 +51,47 @@ const execute = () =>{
     })
 
 
-
-
+    //404
+    // app.use((req,res)=>{
+    //     res.status(404).send('Page not found');
+    // })
 
 
     function routeListener(){
 
-        app.put('/volunteers/:id', async (req, res)=>{
+        app.put('/volunteers/:id', catchAsync(async (req, res, next) =>{
             const {id} = req.params;
-            const {name, lastName, phone} = req.body;
 
-            const volunteer = await Volunteer.findById(id);
+            const updatedVolunteer = await Volunteer.findByIdAndUpdate(id, {...req.body.volunteer})
 
-            
-            volunteer.firstName = name;
-            volunteer.lastName = lastName;
-            volunteer.phone= phone;
-        
-            const updatedVolunteer = await volunteer.save();
+            console.log(req.body.volunteer)
+
             res.redirect(`/volunteers/${updatedVolunteer._id}`);
-        });
+        }));
 
 
-        app.delete('/volunteers/:id', async (req,res)=>{
+        app.delete('/volunteers/:id', catchAsync(async (req,res)=>{
             const {id} = req.params;
 
             const deletedVolunteer = await Volunteer.findByIdAndDelete(id);
 
             res.redirect('/volunteers');
-        })
+        }));
     }
+
+    // Unknown route
+    app.all('*', (req, res, next)=>{
+        next(new ExpressError('Page not Found', 404));
+    });
+
+    //Error Handler
+   app.use((err, req, res, next)=>{
+        const { statusCode=500} = err;
+        if(!err.message) err.message='Something went wrong';
+        res.status(statusCode).render('error', {err});
+   });
+
+    
 
     
 

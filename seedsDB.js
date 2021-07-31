@@ -50,14 +50,22 @@ const initialVolunteers = [
     },
 ];
 
-Volunteer.insertMany(initialVolunteers)
-.then((volunteer)=>{
-    console.log("Volunteers inserted");
-    console.log(volunteer);
-})
-.catch(err => {
-    console.log(`Error while inserting Volunteers ${err}`);
-})
+const resetDB = async() =>{
+    await Volunteer.deleteMany({});
+
+    Volunteer.insertMany(initialVolunteers)
+    .then((volunteer)=>{
+        console.log("Volunteers inserted");
+        console.log(volunteer);
+    })
+    .catch(err => {
+        console.log(`Error while inserting Volunteers ${err}`);
+    })
+}
+
+resetDB();
+
+
 
 
 

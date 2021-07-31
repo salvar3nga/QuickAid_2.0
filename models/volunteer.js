@@ -1,8 +1,9 @@
 const mongoose = require('mongoose');
-const dotenv = require('dotenv').config();
+
+const {Schema} = mongoose;
 
 
-const volunteerSchema = new mongoose.Schema({
+const volunteerSchema = new Schema({
     firstName:{
         type: String,
         required: true
@@ -34,6 +35,17 @@ const volunteerSchema = new mongoose.Schema({
         min: 7,
         required: true
     },
+    emergency:{
+        type: Schema.Types.ObjectId,
+        ref: "Emergency"
+    },
+
+    // previousEmergencies: [
+    //     {
+    //         type: Schema.Types.ObjectId,
+    //         ref: "Emergency"
+    //     }
+    // ]
 
 });
 

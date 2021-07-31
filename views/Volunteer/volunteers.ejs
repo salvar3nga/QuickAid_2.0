@@ -1,0 +1,23 @@
+    <% layout('layouts/boilerplate') %>
+    <h1>All volunteers</h1>
+
+    <a class="btn btn-success mb-5" href="/emergencies/new">Add Emergency</a>
+
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        <% for(let v of volunteers){ %> 
+
+            <div class="col">
+                <div class="card h-100">
+                  <div class="card-body">
+                    <h5 class="card-title"><%=v.firstName%> <%=v.lastName%> </h5>
+                    <p class="card-text">Phone: <%= v.phone %> </p>
+                    <a class="btn btn-info" href="/volunteers/<%= v._id %>">Details</a>
+                  </div> 
+                </div>
+            </div>
+           
+         <% } %>    
+         
+    </div>
+
+    

@@ -1,0 +1,36 @@
+<% layout('layouts/boilerplate') %>
+
+<div class="row">
+    <h1 class="text-center mb-5">Edit Volunteer</h1>
+    <div class="col-6 offset-3">
+        <form action="/volunteers/<%= volunteer._id%>?_method=PUT " method="POST" class="form-validation" novalidate>
+            <div class="mb-3">
+                <label class="form-label" for="name">Firts name</label>
+                <input class="form-control" type="text" id="name" name="volunteer[firstName]" placeholder="first name" value="<%=volunteer.firstName%>" required>
+                <div class="invalid-feedback">
+                    Please provide a name.
+                </div>
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="lastname">Last name</label>
+                <input class="form-control" type="text" id="lastname" name="volunteer[lastName]" placeholder="last name" value="<%=volunteer.lastName%>" required>
+                <div class="invalid-feedback">
+                    Please provide a name.
+                </div>
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="phone">Phone</label>
+                <input class="form-control" type="number" id="phone" name="volunteer[phone]" placeholder="phone" value="<%=volunteer.phone%>" required>
+                <div class="invalid-feedback">
+                     Please provide a phone number.
+                </div>
+            </div>
+            <div class="mb-3 d-flex justify-content-around">
+                <a class="btn btn-danger" href="/volunteers/<%= volunteer._id %> ">Cancel</a>
+                <button class="btn btn-success">Save</button>
+            </div>
+        </form>
+ 
+    </div>
+</div>
+    

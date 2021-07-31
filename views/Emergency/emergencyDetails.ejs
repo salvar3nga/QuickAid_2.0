@@ -1,0 +1,20 @@
+<% layout('layouts/boilerplate') %>
+
+<div class="row">
+    <div class="col-6 offset-3">
+        <div class="card" style="width: 18rem;">
+            <div class="card-body text-center">
+              <h5 class="card-title">Emergency in <b><%=emergency.city%></b> </h5>
+              <p class="card-text"><%=emergency.description%></p>
+            </div>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item"><b>Address</b>: <%= emergency.address %> </li>
+              <!-- <li class="list-group-item"><b>Drivers.Nr:</b></li>
+              <li class="list-group-item"><b>Address:</b></li> -->
+            </ul>
+            <div class="card-body d-flex justify-content-between">
+             <a class="btn btn-info" href="/volunteers">Back</a>
+            </div>
+        </div>
+    </div>
+</div>
