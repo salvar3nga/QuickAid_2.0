@@ -35,10 +35,12 @@ const volunteerSchema = new Schema({
         min: 7,
         required: true
     },
-    emergency:{
-        type: Schema.Types.ObjectId,
-        ref: "Emergency"
-    },
+    emergency:[
+        {
+            type: Schema.Types.ObjectId,
+            ref: "Emergency"
+        }
+    ],
 
     // previousEmergencies: [
     //     {

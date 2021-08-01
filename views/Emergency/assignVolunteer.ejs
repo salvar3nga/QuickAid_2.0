@@ -1,0 +1,46 @@
+<% layout('layouts/boilerplate') %>
+<div class="d-flex">
+  <div class="col">
+    <h1 class=>Choose Volunteer</h1>
+  </div>
+  <div class="col d-flex justify-content-between">
+    <a class="btn btn-info mb-5" href="/emergencies/<%= id %> ">Back</a>
+  </div>
+</div>
+
+
+
+<div class="row row-cols-1 row-cols-md-3 g-4">
+    <% for(let v of volunteers){ %> 
+      <% if(v.emergency.length !== 0){ %> 
+          <div class="col">
+              <div class="card h-100 border-danger">
+                <div class="card-body">
+                  <h5 class="card-title"><%=v.firstName%> <%=v.lastName%></h5>
+                  <p class="card-text">Phone: <%= v.phone %> </p>
+                  <form class="d-inline" action="/emergencies/<%=id%>/volunteers/<%=v._id%> " method="POST">
+                      <button class="btn btn-secondary disabled">Assign</button>
+                  </form>
+                </div> 
+              </div>
+          </div>  
+      <% }else{ %>   
+        <div class="col">
+          <div class="card h-100">
+            <div class="card-body">
+              <h5 class="card-title"><%=v.firstName%> <%=v.lastName%></h5>
+              <p class="card-text">Phone: <%= v.phone %> </p>
+              <form class="d-inline" action="/emergencies/<%=id%>/volunteers/<%=v._id%> " method="POST">
+                  <button class="btn btn-success">Assign</button>
+              </form>
+            </div> 
+          </div>
+      </div>   
+     <% } %>    
+     <% } %>    
+</div>
+
+
+  
+
+

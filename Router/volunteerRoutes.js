@@ -1,10 +1,11 @@
 const router = require("express").Router();
 const Volunteer = require('../models/volunteer');
-const Emergency = require('../models/emergency');
 const catchAsync = require('../helpers/catchAsync');
 const ExpressError = require('../helpers/ExpressError');
 const {volunteerValidation} = require('../helpers/joiValidation');
+const methodOverride = require('method-override');
 
+router.use(methodOverride('_method'));
 
 
 const validateVolunteer = (req, res, next)=>{
@@ -21,28 +22,6 @@ const validateVolunteer = (req, res, next)=>{
         next();
     }
 }
-
-//EMERGENCY ROUTES
-
-router.get("/emergencies/new", (req, res)=>{
-    res.render('Emergency/newEmergency');
-});
-
-router.post("/emergencies", async (req, res)=>{
-    const emergency = new Emergency(req.body);
-    
-    await emergency.save();
-
-    res.redirect(`/emergencies/${emergency._id}`);
-});
-
-router.get("/emergencies/:id", async (req,res)=>{
-    const {id} = req.params;
-
-    const emergency = await Emergency.findById(id);
-
-    res.render('Emergency/emergencyDetails', {emergency});
-})
 
 
    
@@ -114,15 +93,24 @@ router.get('/volunteers/:id/edit', catchAsync(async (req,res)=>{
 }));
 
 /* PUT and DELETE REQUESTS ARE CURRENTLY SERVED ON INDEX JS */
-// router.put('/volunteers/:id', (req, res, next)=>{
-    //     console.log(req.body);
-    //     res.send('PUT REQUEST')
-    // });
-    
-    
-    // router.delete('/volunteers/:id', async(req,res)=>{
-    //     res.send('Deleting...')
-    // })
+
+router.put('/volunteers/:id', catchAsync(async (req, res, next) =>{
+    const {id} = req.params;
+
+    const updatedVolunteer = await Volunteer.findByIdAndUpdate(id, {...req.body.volunteer})
+
+
+    res.redirect(`/volunteers/${updatedVolunteer._id}`);
+}));
+
+
+router.delete('/volunteers/:id', catchAsync(async (req,res)=>{
+    const {id} = req.params;
+
+    const deletedVolunteer = await Volunteer.findByIdAndDelete(id);
+
+    res.redirect('/volunteers');
+}));
     
     
 

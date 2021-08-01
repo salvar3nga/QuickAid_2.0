@@ -4,9 +4,9 @@ const {Schema} = mongoose;
 
 
 const emergencySchema = new Schema({
-    description: String,
     city: String,
     street: String,
+    description: String,
     // volunteer:[
     //     {
     //         // _id: {id: false},

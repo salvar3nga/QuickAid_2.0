@@ -1,12 +1,30 @@
     <% layout('layouts/boilerplate') %>
-    <h1>All volunteers</h1>
+    <div class="d-flex">
+      <div class="col">
+        <h1>All volunteers</h1>
+      </div>
+      <div class="col d-flex justify-content-between">
+        <a class="btn btn-success mb-5" href="/emergencies/new">Add Emergency</a>
+        <a class="btn btn-primary mb-5" href="/emergencies">All Emergencies</a>
+      </div>
+    </div>
 
-    <a class="btn btn-success mb-5" href="/emergencies/new">Add Emergency</a>
+    <div class="input-group">
+      <div class="form-outline">
+        <input id="search-input" placeholder="Search" type="search" id="form1" class="form-control" />
+        <!-- <label class="form-label" for="form1">Search</label> -->
+      </div>
+      <button id="search-button" type="button" class="btn btn-primary h-50">
+        <i class="fas fa-search"></i>
+      </button>
+    </div>
+    
 
-    <div class="row row-cols-1 row-cols-md-3 g-4">
+
+    <div class="row row-cols-1 row-cols-md-3 g-4 mt-5">
         <% for(let v of volunteers){ %> 
 
-            <div class="col">
+            <div class="col volunteer-card">
                 <div class="card h-100">
                   <div class="card-body">
                     <h5 class="card-title"><%=v.firstName%> <%=v.lastName%> </h5>
@@ -19,5 +37,36 @@
          <% } %>    
          
     </div>
+
+<script>
+    const searchButton = document.getElementById('search-button');
+    const searchInput = document.getElementById('search-input');
+    searchButton.addEventListener('click', () => {
+      
+      search();
+      
+    });
+
+    search();
+
+    function search(){
+      searchInput.addEventListener("keyup", (evt)=>{
+      
+        const searchValue = evt.target.value.toLowerCase();
+
+        const cards = document.querySelectorAll('.volunteer-card');
+
+        cards.forEach(card=>{
+          card.style.display= "none";
+            if(card.innerText.toLowerCase().indexOf(searchValue) > -1){
+              card.style.display= "";
+            }
+
+          })
+        })
+
+    }
+  
+</script>
 
     

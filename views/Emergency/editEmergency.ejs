@@ -1,0 +1,42 @@
+<% layout('layouts/boilerplate') %>
+
+<div class="row">
+    <h1 class="text-center mb-5">Edit Emergency</h1>
+    <div class="col-6 offset-3">
+     <form action="/emergencies/<%=emergency._id%>?_method=PUT" method="POST" novalidate class="form-validation">
+         <div class="mb-3">
+             <label class="form-label" for="name">City</label>
+             <input class="form-control" type="text" id="name" name="emergency[city]" placeholder="City" required value="<%= emergency.city %>">
+             <div class="invalid-feedback">
+                 Please provide a valid city.
+             </div>
+             <div class="valid-feedback">
+                 :D
+             </div>
+         </div>
+         <div class="mb-3">
+             <label class="form-label" for="lastname">Street</label>
+             <input class="form-control" type="text" id="lastname" name="emergency[street]" placeholder="street" required value="<%= emergency.street %>">
+             <div class="invalid-feedback">
+                 Please provide a valid street.
+             </div>
+         </div>
+         <div class="mb-3">
+              <label class="form-label">Description (optional)</label>
+             
+             <div class="form-floating">
+                <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 200px" name="emergency[description]"><%= emergency.description%></textarea>
+                <label class="form-label" for="floatingTextarea2">Emergency description</label>
+              </div>
+             <div class="invalid-feedback">
+                 Please provide a valid phone number.
+             </div>
+         </div>
+         <div class="mb-3 d-flex justify-content-around">
+             <a class="btn btn-danger" href="/emergencies/<%=emergency._id%>">Cancel</a>
+             <button class="btn btn-success">Save</button>
+         </div>
+     </form>
+ 
+    </div>
+</div>

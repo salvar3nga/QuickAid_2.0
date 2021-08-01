@@ -1,0 +1,47 @@
+<% layout('layouts/boilerplate') %>
+<h1>All emergencies</h1>
+
+<a class="btn btn-success mb-5" href="/emergencies/new">Add Emergency</a>
+
+<div class="row row-cols-1 row-cols-md-3 g-4">
+    <% for(let e of emergencies){ %> 
+        <% if(e.volunteer) {%> 
+          <div class="col">
+            <div class="card h-100 border-danger">
+              <div class="card-body">
+                <h5 class="card-title"><%=e.city%> </h5>
+                <p class="card-text">Description: <%= e.description %> </p>
+                <p><span class="badge bg-danger"><%= e.volunteer.firstName %> <%= e.volunteer.lastName %></span></p>
+                <a class="btn btn-info" href="/emergencies/<%= e._id %>">Details</a>
+              </div> 
+            </div>
+          </div>
+          <% } else { %> 
+            <div class="col">
+              <div class="card h-100">
+                <div class="card-body">
+                  <h5 class="card-title"><%=e.city%> </h5>
+                  <p class="card-text">Description: <%= e.description %> </p>
+                  <a class="btn btn-info" href="/emergencies/<%= e._id %>">Details</a>
+                </div> 
+              </div>
+            </div>
+          <% } %> 
+    
+     <% } %>    
+     
+</div>
+
+
+
+<script>
+  const card = document.querySelector('.card');
+
+  if(emergencies.volunteer){
+
+  }
+  
+
+</script>
+
+
