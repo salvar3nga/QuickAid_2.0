@@ -23,35 +23,17 @@ const validateVolunteer = (req, res, next)=>{
     }
 }
 
+const states = [
+    'bafata','biombo',
+    'bissau','bolama',
+    'cacheu', 'gabu', 
+    'oio', 'quinara', 'tombali'];
 
    
 // VOLUNTEER ROUTES
 router.get("/", (req, res)=>{
 
     res.redirect('/volunteers')
-})
-
-router.get('/dashboard', (req, res)=>{
-    res.render('dashboard');
-})
-
-router.get("/login", (req, res)=>{
-    
-    res.render('login')
-})
-
-router.post('/login', (req, res)=>{
-    const {username, password} = req.body;
-
-    if(!(username == admin.username) && (password == admin.password)){
-        console.log(`${username} ,${admin.username}, ${password}, ${admin.password}`);
-        res.send("not loggged in");
-    }
-    else{
-        console.log(`${username} ,${admin.username}, ${password}, ${admin.password}`);
-        //res.render('dashboard');
-    }
-   
 })
 
 
@@ -64,13 +46,15 @@ router.get('/volunteers', catchAsync(async (req,res)=>{
 // Form to create a new volunteer
 router.get('/volunteers/new', (req,res)=>{
 
-    res.render('Volunteer/newVolunteer');
+    res.render('Volunteer/newVolunteer', {states});
 });
 
 router.post('/volunteers', validateVolunteer, catchAsync(async (req, res)=>{
     
    
     const newVolunteer = new Volunteer(req.body.volunteer);
+
+ 
 
     await newVolunteer.save();
 
@@ -89,7 +73,7 @@ router.get('/volunteers/:id', catchAsync(async(req,res)=>{
 router.get('/volunteers/:id/edit', catchAsync(async (req,res)=>{
     const {id} = req.params;
     const volunteer = await Volunteer.findById(id);
-    res.render('Volunteer/editVolunteer', {volunteer});
+    res.render('Volunteer/editVolunteer', {volunteer, states});
 }));
 
 /* PUT and DELETE REQUESTS ARE CURRENTLY SERVED ON INDEX JS */

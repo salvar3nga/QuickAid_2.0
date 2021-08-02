@@ -68,7 +68,7 @@ router.post("/emergencies/:id/volunteers/:vol_id", async (req, res)=>{
 
     const emergency = await Emergency.findById(id);
     const volunteer = await Volunteer.findById(vol_id);
-//    const em = await Emergency.findByIdAndUpdate(id, {volunteer});
+    emergency.isActive = true;
 
     volunteer.emergency.push(emergency);
     emergency.volunteer = volunteer;
@@ -76,11 +76,10 @@ router.post("/emergencies/:id/volunteers/:vol_id", async (req, res)=>{
     /* 
         TODO: set availability to false on volunteer etc...
     */
-
-      
+ 
     await emergency.save();
     await volunteer.save();
-    
+
     res.redirect(`/emergencies/${emergency._id}`);
 
 });
@@ -91,6 +90,25 @@ router.put('/emergencies/:id', catchAsync(async(req,res, next)=>{
     const updatedEmergency = await Emergency.findByIdAndUpdate(id, {...req.body.emergency});
     
     res.redirect(`/emergencies/${updatedEmergency._id}`);
+}));
+//Unassign
+router.put('/emergencies/:id/volunteers/:vol_id', catchAsync(async(req,res, next)=>{
+    const {id, vol_id} = req.params;
+
+    const emergency = await Emergency.findById(id);
+    const volunteer = await Volunteer.findById(vol_id);
+
+    emergency.volunteer = undefined;
+    emergency.isActive = false;
+
+    volunteer.emergency = undefined;
+    
+    await emergency.save();
+    await volunteer.save();
+
+
+    res.redirect(`/emergencies/${emergency._id}`);
+    
 }));
 
 router.delete('/emergencies/:id', catchAsync(async (req,res)=>{

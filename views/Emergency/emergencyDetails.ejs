@@ -17,9 +17,17 @@
              <a class="btn btn-warning" href="/emergencies/<%=emergency._id  %>/edit">Edit</a>
             <% if(!emergency.volunteer) {%> 
                  <a class="btn btn-success" href="/emergencies/<%=emergency._id%>/volunteers/assign">Assign</a>
+            <% }else{%>
+              <form action="/emergencies/<%= emergency._id %>/volunteers/<%= emergency.volunteer._id %>?_method=PUT" method="POST">
+                <button class="btn btn-secondary">Unassign</button>
+              </form>
             <% }%> 
             </div>
-            <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Delete</button>
+            <% if(!emergency.volunteer) {%> 
+              <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Delete</button>
+            <% }else{%> 
+              <button class="btn btn-danger disabled" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Delete</button>
+            <% }%> 
         </div>
     </div>
 </div>

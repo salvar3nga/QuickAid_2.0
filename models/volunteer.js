@@ -12,28 +12,36 @@ const volunteerSchema = new Schema({
         type: String,
         required: true
     },
-    // address:{
-    //     type: String,
-        
-    // },
-    // city: {
-    //     type: String
-    // },
-    // state: {
-    //     type: String
-    // },
-    // postal: {
-    //     type: String,
-    //     default: 'N/A'
-    // },
-    // country: {
-    //     type: String,
-    //     default: 'Guinea-Bissau'
-    // },
+    address:{
+        type: String,
+    },
+    city: {
+        type: String
+    },
+    state: {
+        type: String
+    },
+    birthday: {
+        type: String
+    },
+    personalID: {
+        type: String
+    },
+    licenseNR: {
+        type: String
+    },
     phone: {
         type: Number,
         min: 7,
         required: true
+    },
+    isBusy: {
+        type: Boolean,
+        default: false
+    },
+    hasCar: {
+        type: Boolean,
+        default: false
     },
     emergency:[
         {

@@ -17,17 +17,25 @@
       <button id="search-button" type="button" class="btn btn-primary h-50">
         <i class="fas fa-search"></i>
       </button>
+
+      <div class="form-outline ms-3 visually-hidden" id="extra-search">
+        <input type="search" id="form1" class="form-control" placeholder="search"
+        aria-label="Search" />
+      </div>
     </div>
     
 
 
     <div class="row row-cols-1 row-cols-md-3 g-4 mt-5">
         <% for(let v of volunteers){ %> 
-
             <div class="col volunteer-card">
                 <div class="card h-100">
                   <div class="card-body">
-                    <h5 class="card-title"><%=v.firstName%> <%=v.lastName%> </h5>
+                    <div class="d-flex justify-content-between">
+                      <h5 class="card-title"><%=v.firstName%> <%=v.lastName%></h5>
+                      <span class="text-muted"><%= v.city %> </span>
+                    </div>
+                    <p class="card-text"><b>Address:</b> <%= v.address %> </p>
                     <p class="card-text">Phone: <%= v.phone %> </p>
                     <a class="btn btn-info" href="/volunteers/<%= v._id %>">Details</a>
                   </div> 
@@ -41,27 +49,58 @@
 <script>
     const searchButton = document.getElementById('search-button');
     const searchInput = document.getElementById('search-input');
+    const extraSearch = document.getElementById('extra-search');
+
     searchButton.addEventListener('click', () => {
       
       search();
-      
+      // extraSearch.classList.toggle('visually-hidden');
     });
 
     search();
-
+    
     function search(){
       searchInput.addEventListener("keyup", (evt)=>{
       
         const searchValue = evt.target.value.toLowerCase();
-
         const cards = document.querySelectorAll('.volunteer-card');
 
+
+        if(searchValue!= ''){
+          extraSearch.classList.remove('visually-hidden'); 
+          search2();
+        }else{
+          extraSearch.classList.add('visually-hidden');
+          
+          cards.forEach(card=>{
+            console.log('removing...')
+            card.classList.remove('found');
+          })
+        }
+
+
+        cards.forEach(card=>{
+            card.style.display= "none";
+            if(card.innerText.toLowerCase().indexOf(searchValue) > -1){
+              card.style.display= "";
+              card.classList.add('found');
+            }
+
+          })
+        })
+
+    }
+
+    function search2(){
+      extraSearch.addEventListener("keyup", (evt)=>{
+      
+        const searchValue = evt.target.value.toLowerCase();
+        const cards = document.querySelectorAll('.found');
         cards.forEach(card=>{
           card.style.display= "none";
             if(card.innerText.toLowerCase().indexOf(searchValue) > -1){
               card.style.display= "";
             }
-
           })
         })
 

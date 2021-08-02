@@ -7,14 +7,10 @@ const emergencySchema = new Schema({
     city: String,
     street: String,
     description: String,
-    // volunteer:[
-    //     {
-    //         // _id: {id: false},
-    //         firstName: String,
-    //         lastName: String,
-    //         phone: Number
-    //     }
-    // ]
+    isActive:{
+        type: Boolean,
+        default: false
+    },
     volunteer: {
         type: Schema.Types.ObjectId,
         ref:"Volunteer"
