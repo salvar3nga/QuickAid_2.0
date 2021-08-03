@@ -1,7 +1,7 @@
 <% layout('layouts/boilerplate') %>
 
 <div class="row">
-    <div class="col-6 offset-3">
+    <div class="col-6">
         <div class="card" style="width: 18rem;">
             <div class="card-body text-center">
               <h5 class="card-title">Emergency in <b><%=emergency.city%></b> </h5>
@@ -29,6 +29,9 @@
               <button class="btn btn-danger disabled" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Delete</button>
             <% }%> 
         </div>
+    </div>
+    <div class="col-6">
+      <div id='map' style='width: 400px; height: 300px;'></div>
     </div>
 </div>
 
@@ -84,3 +87,33 @@
     </div>
   </div>
 </div>
+
+<% if(true){ %>
+  <script>
+    const emergency = <%-emergency %>
+  </script>
+  
+<% } %>  
+
+
+<script >
+  mapboxgl.accessToken = 'pk.eyJ1Ijoic2FsdmFyZW5nYSIsImEiOiJja3J2emU5YzQwYmZtMm5uOHliMm1oZzZnIn0.ldkdTJN289aWB-nj6AC5PA';
+  const map = new mapboxgl.Map({
+    container: 'map', // container ID
+    style: 'mapbox://styles/mapbox/streets-v11', // style URL
+    center: [-74.5, 40], // starting position [lng, lat]
+    zoom: 8 // starting zoom
+});
+
+console.log(em);
+
+//Setting the marker in the Map
+new mapboxgl.Marker()
+.setLngLat([-74.5, 40])
+.addTo(map);
+
+
+</script>
+
+
+<!-- <script src="/js/mapDetails.js"></script> -->

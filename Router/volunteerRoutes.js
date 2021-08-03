@@ -51,12 +51,12 @@ router.get('/volunteers/new', (req,res)=>{
 
 router.post('/volunteers', validateVolunteer, catchAsync(async (req, res)=>{
     
-   
+    
     const newVolunteer = new Volunteer(req.body.volunteer);
-
- 
-
+    
     await newVolunteer.save();
+
+    req.flash('success', 'Successfully created a new volunteer');
 
     res.redirect(`/volunteers/${newVolunteer._id}`);
 
@@ -65,9 +65,29 @@ router.post('/volunteers', validateVolunteer, catchAsync(async (req, res)=>{
 
 router.get('/volunteers/:id', catchAsync(async(req,res)=>{
     const {id} = req.params;
-    // Volunteer.findOne({_id: id});
-    const volunteer = await Volunteer.findById(id);
-    res.render('Volunteer/volunteerDetails', {volunteer});
+
+    // const volunteer = await Volunteer.findById(id).populate('emergency');
+
+    // if(!volunteer){
+    //     req.flash('error', 'Volunteer not found');
+    //     res.redirect('/volunteers');    
+    // }else{
+    //     res.render('Volunteer/volunteerDetails', {volunteer});
+    // }
+
+
+    try{
+        const volunteer = await Volunteer.findById(id).populate('emergency');
+        res.render('Volunteer/volunteerDetails', {volunteer});
+    }catch(err){
+        req.flash('error', 'Volunteer not found');
+        res.redirect('/volunteers');    
+
+    }
+    
+       
+    
+
 }));
 
 router.get('/volunteers/:id/edit', catchAsync(async (req,res)=>{
@@ -81,10 +101,18 @@ router.get('/volunteers/:id/edit', catchAsync(async (req,res)=>{
 router.put('/volunteers/:id', catchAsync(async (req, res, next) =>{
     const {id} = req.params;
 
-    const updatedVolunteer = await Volunteer.findByIdAndUpdate(id, {...req.body.volunteer})
+    try{
+        const updatedVolunteer = await Volunteer.findByIdAndUpdate(id, {...req.body.volunteer})
 
+        req.flash('success', 'Successfully updated volunteer');
+    
+        res.redirect(`/volunteers/${updatedVolunteer._id}`);
+    }catch(err){
+        req.flash('error', 'Volunteer not found');
+        res.redirect('/volunteers');    
 
-    res.redirect(`/volunteers/${updatedVolunteer._id}`);
+    }
+
 }));
 
 

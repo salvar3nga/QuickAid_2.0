@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const {Schema} = mongoose;
 
 
+
 const volunteerSchema = new Schema({
     firstName:{
         type: String,
@@ -49,6 +50,10 @@ const volunteerSchema = new Schema({
             ref: "Emergency"
         }
     ],
+    registrationDate:{
+        type: Date,
+        default: new Date()
+    }
 
     // previousEmergencies: [
     //     {

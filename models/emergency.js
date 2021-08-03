@@ -14,6 +14,17 @@ const emergencySchema = new Schema({
     volunteer: {
         type: Schema.Types.ObjectId,
         ref:"Volunteer"
+    },
+    location:{
+        type: {
+            type: String,
+            enum: ['Point'],
+            required: true
+          },
+          coordinates: {
+            type: [Number],
+            required: true
+          }
     }
 })
 

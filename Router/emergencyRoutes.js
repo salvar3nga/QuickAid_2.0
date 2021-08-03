@@ -4,6 +4,17 @@ const Volunteer = require('../models/volunteer');
 const ExpressError = require('../helpers/ExpressError');
 const catchAsync = require('../helpers/catchAsync');
 const methodOverride = require('method-override');
+const { findByIdAndUpdate } = require('../models/emergency');
+const dotenv = require('dotenv').config();
+
+const mapBoxGeocode = require('@mapbox/mapbox-sdk/services/geocoding');
+const mapBoxToken = process.env.MAPBOX_TOKEN;
+
+const geocoder = mapBoxGeocode({accessToken: mapBoxToken});
+
+
+
+
 
 router.use(methodOverride('_method'));
 
@@ -21,9 +32,18 @@ router.get("/emergencies", async (req,res)=>{
 
 
 router.post("/emergencies", async (req, res)=>{
+
+    const geoData = await geocoder.forwardGeocode({
+        query: `${req.body.emergency.city}, GW`,
+        limit: 1,
+    }).send()
+
+
     const emergency = new Emergency(req.body.emergency);
-    
+    emergency.location = geoData.body.features[0].geometry;
     await emergency.save();
+
+    req.flash('success', 'Successfully created an emergency');
 
     res.redirect(`/emergencies/${emergency._id}`);
 });
@@ -36,7 +56,6 @@ router.get("/emergencies/:id", async (req,res)=>{
     const {id} = req.params;
 
     const emergency = await Emergency.findById(id).populate('volunteer');
-   
     res.render('Emergency/emergencyDetails', {emergency});
 })
 
@@ -62,6 +81,7 @@ router.get("/emergencies/:id/volunteers/assign", async (req,res)=>{
 
 });
 
+    //ASSIGN
 
 router.post("/emergencies/:id/volunteers/:vol_id", async (req, res)=>{
     const {id, vol_id} = req.params;
@@ -72,6 +92,9 @@ router.post("/emergencies/:id/volunteers/:vol_id", async (req, res)=>{
 
     volunteer.emergency.push(emergency);
     emergency.volunteer = volunteer;
+
+
+    volunteer.isBusy = true;
     
     /* 
         TODO: set availability to false on volunteer etc...
@@ -79,6 +102,9 @@ router.post("/emergencies/:id/volunteers/:vol_id", async (req, res)=>{
  
     await emergency.save();
     await volunteer.save();
+
+    req.flash('success', 'Successfully assigned');
+
 
     res.redirect(`/emergencies/${emergency._id}`);
 
@@ -95,16 +121,15 @@ router.put('/emergencies/:id', catchAsync(async(req,res, next)=>{
 router.put('/emergencies/:id/volunteers/:vol_id', catchAsync(async(req,res, next)=>{
     const {id, vol_id} = req.params;
 
+    const updatedVolunteer = await Volunteer.findByIdAndUpdate(vol_id, {$pull:{emergency: id}});
+    
+    updatedVolunteer.isBusy = false;
     const emergency = await Emergency.findById(id);
-    const volunteer = await Volunteer.findById(vol_id);
-
     emergency.volunteer = undefined;
     emergency.isActive = false;
-
-    volunteer.emergency = undefined;
     
     await emergency.save();
-    await volunteer.save();
+    await updatedVolunteer.save();
 
 
     res.redirect(`/emergencies/${emergency._id}`);
