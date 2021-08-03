@@ -34,7 +34,7 @@ router.get("/emergencies", async (req,res)=>{
 router.post("/emergencies", async (req, res)=>{
 
     const geoData = await geocoder.forwardGeocode({
-        query: `${req.body.emergency.city}, GW`,
+        query: `${req.body.emergency.city}`,
         limit: 1,
     }).send()
 
