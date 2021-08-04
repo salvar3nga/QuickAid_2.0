@@ -1,22 +1,22 @@
 <% layout('layouts/boilerplate') %>
 <h1 class="d-flex justify-content-between border-bottom mb-5">
   <div>All Emergencies</div>
-  <div><a class="btn btn-sm btn-outline-secondary" href="/emergencies">Occuring Emergencies</a></div>
+  <div><a class="btn btn-sm disabled btn-outline-secondary" href="/emergencies">Occuring Emergencies</a></div>
   <div class="dropdown">
-    <a class="btn btn-success dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+    <a class="btn btn-sm btn-success dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
         <path d="M8 0a1 1 0 0 1 1 1v6h6a1 1 0 1 1 0 2H9v6a1 1 0 1 1-2 0V9H1a1 1 0 0 1 0-2h6V1a1 1 0 0 1 1-1z"/>
       </svg>    
     </a>
     <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
       <li><a class="dropdown-item" href="/emergencies/new"> Emergency</a></li>
-      <li><a class="dropdown-item disabled" href="/volunteers/new">Volunteer</a></li>
+      <li><a class="dropdown-item" href="/volunteers/new">Volunteer</a></li>
     </ul>
   </div>
 </div>
 </h1>
 
-<div class="row row-cols-1 row-cols-md-3 g-4">
+<!-- <div class="row row-cols-1 row-cols-md-3 g-4">
     <% for(let e of emergencies){ %> 
         <% if(e.volunteer) {%> 
           <div class="col">
@@ -43,7 +43,40 @@
     
      <% } %>    
      
-</div>
+</div> -->
 
+<ol class="list-group list-group-numbered">
+    <% for(let e of emergencies){ %>
+      <% if(e.volunteer) {%>
+        <a href="/emergencies/<%= e._id %> " style="text-decoration: none;" class="list-group-item-action mb-3">
+          <li class="list-group-item list-group-item-secondary d-flex justify-content-between align-items-start">
+            <div class="ms-2 me-auto">
+              <div class="fw-bold">
+                <div><%= e.street %>, <%= e.city %>  </div>
+              </div>
+               <span class="text-muted"><%= e.description %> </span>
+            </div>
+            <div>
+            <span class="badge bg-danger rounded-pill" style="font-size: 14px;"><%=e.volunteer.firstName%> <%=e.volunteer.lastName%> </span>
+            <span class="text-muted">!</span>
+            </div>
+          </li>
+        </a>
+      <% }else{ %>
+        <a href="/emergencies/<%= e._id %> " style="text-decoration: none;" class="list-group-item-action mb-3">
+          <li class="list-group-item d-flex justify-content-between align-items-start">
+            <div class="ms-2 me-auto">
+              <div class="fw-bold">
+                <div><%= e.street %>, <%= e.city %>  </div>
+              </div>
+               <span class="text-muted">  <%= e.description %> </span>
+            </div>
+            <span class="text-muted" style="font-size: 14px;">04.08.21</span>
+          </li>
+        </a>  
+      <% } %>  
+   <% } %> 
+
+</ol>
 
 

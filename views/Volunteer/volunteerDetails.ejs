@@ -9,19 +9,66 @@
   </div>
 </h2>
 
-<div class="card">
-  <div class="card-body border border-top-0 rounden-bottom">
-    <div class="row">
-      <p class="mb-5 col-6"><strong>Address</strong> <i class="border-bottom"><%=volunteer.address %></i></p>
-      <p class="mb-5 col-3"><strong>City</strong> <i class="border-bottom"><%=volunteer.city %></i></p>
-      <p class="mb-5 col-3"><strong>State of</strong> <i class="border-bottom"><%= volunteer.state.charAt(0).toUpperCase()+ volunteer.state.slice(1)%></i></p>
-      <p class="mb-5 col-6"><strong>Phone Number:</strong> <i class="border-bottom"><%=volunteer.phone %> </i></p>
-      <p class="mb-5 col-6"><strong>Drivers License</strong> <i class="border-bottom"><%= volunteer.licenseNR%></i></p>
-      <p class="mb-5 col-6"><strong>Personal ID</strong> <i class="border-bottom"><%= volunteer.personalID%></i></p>
-      <p class="mb-5 col-6"><strong>Birthday</strong> <i class="border-bottom"><%= volunteer.birthday%></i></p>
+
+<div class="row">
+  <div class="col-sm-6">
+    <div class="card">
+      <div class="card-body row">
+        <div class="col-12 border-bottom mb-2 pb-3">
+          <div class="d-flex justify-content-center">
+            <%= volunteer.address %> 
+          </div>
+        </div>
+        <div class="col-6 border-end mt-2 pt-2">
+          <div class="d-flex justify-content-center">
+              <div>
+                <p><%=volunteer.personalID%></p>
+                <span class="text-muted">Personal ID</span>
+              </div>
+          </div>
+        </div>
+        <div class="col-6 border-start mt-2 pt-2">
+          <div class="d-flex justify-content-center">
+              <div>
+                <p><%=volunteer.licenseNR  %>  </p>
+                <span class="text-muted">Drivers License</span>
+              </div>
+          </div>
+        </div>
     </div>
   </div>
 </div>
+
+<div class="col-sm-6">
+  <div class="card">
+      <div class="card-body row">
+        <div class="col-12 border-bottom mb-2 pb-3">
+          <div class="d-flex justify-content-center">
+            Joined since: <%=volunteer.registrationDate.getDate()%>.<%=volunteer.registrationDate.getMonth()+1%>.<%=volunteer.registrationDate.getFullYear()%>
+          </div>
+        </div>
+        <div class="col-6 border-end mt-2 pt-2">
+          <div class="d-flex justify-content-center">
+              <div>
+                <p><%=volunteer.phone%></p>
+                <span class="text-muted">Phone Number</span>
+              </div>
+          </div>
+        </div>
+        <div class="col-6 border-start mt-2 pt-2">
+          <div class="d-flex justify-content-center">
+              <div>
+                <p><%=volunteer.city%>, <%= volunteer.state.charAt(0).toUpperCase()+ volunteer.state.slice(1) %> </p>
+                <span class="text-muted">City, State</span>
+              </div>
+          </div>
+        </div>
+    </div>
+  </div>
+
+
+
+
 
 
 
