@@ -1,7 +1,6 @@
 <% layout('layouts/boilerplate') %>
 <h1 class="d-flex justify-content-between border-bottom mb-5">
   <div>All Emergencies</div>
-  <div><a class="btn btn-sm disabled btn-outline-secondary" href="/emergencies">Occuring Emergencies</a></div>
   <div class="dropdown">
     <a class="btn btn-sm btn-success dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
@@ -10,40 +9,12 @@
     </a>
     <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
       <li><a class="dropdown-item" href="/emergencies/new"> Emergency</a></li>
+      <li><hr class="dropdown-divider"></li>
       <li><a class="dropdown-item" href="/volunteers/new">Volunteer</a></li>
     </ul>
   </div>
 </div>
 </h1>
-
-<!-- <div class="row row-cols-1 row-cols-md-3 g-4">
-    <% for(let e of emergencies){ %> 
-        <% if(e.volunteer) {%> 
-          <div class="col">
-            <div class="card h-100 border-danger">
-              <div class="card-body">
-                <h5 class="card-title"><%=e.city%> </h5>
-                <p class="card-text">Description: <%= e.description %> </p>
-                <p><span class="badge bg-danger"><%= e.volunteer.firstName %> <%= e.volunteer.lastName %></span></p>
-                <a class="btn btn-info" href="/emergencies/<%= e._id %>">Details</a>
-              </div> 
-            </div>
-          </div>
-          <% } else { %> 
-            <div class="col">
-              <div class="card h-100">
-                <div class="card-body">
-                  <h5 class="card-title"><%=e.city%> </h5>
-                  <p class="card-text">Description: <%= e.description %> </p>
-                  <a class="btn btn-info" href="/emergencies/<%= e._id %>">Details</a>
-                </div> 
-              </div>
-            </div>
-          <% } %> 
-    
-     <% } %>    
-     
-</div> -->
 
 <ol class="list-group list-group-numbered">
     <% for(let e of emergencies){ %>

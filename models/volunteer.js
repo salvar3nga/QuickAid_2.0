@@ -44,6 +44,10 @@ const volunteerSchema = new Schema({
         type: Boolean,
         default: false
     },
+    emergencyClosed: {
+        type: Number,
+        default: 0
+    },
     emergency:[
         {
             type: Schema.Types.ObjectId,

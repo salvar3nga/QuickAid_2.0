@@ -3,9 +3,14 @@
 
 <h2 class="border-bottom d-flex justify-content-between">
   <div><%=volunteer.firstName%> <strong><%=volunteer.lastName%></strong> </div>
+  <%=volunteer.registrationDate.toLocaleTimeString()%>
   <div>
-    <a class="btn btn-warning" href="/volunteers/<%=volunteer._id  %>/edit">Edit</a>
-    <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Delete</button>
+    <a class="btn btn-sm btn-warning" href="/volunteers/<%=volunteer._id  %>/edit">Edit</a>
+    <% if(volunteer.isBusy) {%> 
+    <button class="btn btn-sm btn-danger disabled" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Delete</button>
+    <% }else{%> 
+    <button class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Delete</button>
+    <% } %> 
   </div>
 </h2>
 

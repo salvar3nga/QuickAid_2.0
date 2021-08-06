@@ -1,73 +1,67 @@
 <% layout('layouts/boilerplate') %>
 
-
+<h2 class="border-bottom mb-3 d-flex justify-content-between">
+  <div>Details</div>
+  <div>
+    <a class="btn btn-sm btn-warning" href="/emergencies/<%=emergency._id%>/edit">Edit</a>
+  </div>
+</h2>
 
 <div class="row">
-    <div class="col-6">
-        <div class="card" style="width: 18rem;">
-            <div class="card-body text-center">
-              <h5 class="card-title">Emergency in <b><%=emergency.city%></b> </h5>
-              <p class="card-text"><%=emergency.description%></p>
-            </div>
-            <ul class="list-group list-group-flush">
-              <li class="list-group-item"><b>Street</b>: <%=emergency.street%> </li>
-              <!-- <li class="list-group-item"><b>Drivers.Nr:</b></li>
-              <li class="list-group-item"><b>Address:</b></li> -->
-            </ul>
-            <div class="card-body d-flex justify-content-between">
-             <a class="btn btn-info" href="/emergencies">Back</a>
-             <a class="btn btn-warning" href="/emergencies/<%=emergency._id  %>/edit">Edit</a>
-            <% if(!emergency.volunteer) {%> 
-                 <a class="btn btn-success" href="/emergencies/<%=emergency._id%>/volunteers/assign">Assign</a>
-            <% }else{%>
-              <form action="/emergencies/<%= emergency._id %>/volunteers/<%= emergency.volunteer._id %>?_method=PUT" method="POST">
-                <button class="btn btn-secondary">Unassign</button>
-              </form>
-            <% }%> 
-            </div>
-            <% if(!emergency.volunteer) {%> 
-              <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Delete</button>
-            <% }else{%> 
-              <button class="btn btn-danger disabled" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Delete</button>
-            <% }%> 
-        </div>
+  <div class="col-12">
+    <div id='map' style='width: 100%; height: 300px;'></div>
+  </div>
+  <div class="col-5 mt-4">
+    <h3><%=emergency.street%> </h3>
+    <% if(!emergency.volunteer) {%> 
+    <a class="btn btn-sm btn-success" href="/emergencies/<%=emergency._id%>/volunteers/assign">Assign</a>
+  <% }else{%>
+    <form action="/emergencies/<%= emergency._id %>/volunteers/<%= emergency.volunteer._id %>?_method=PUT" method="POST">
+      <button class="btn btn-sm btn-secondary">Unassign</button>
+    </form>
+  <% }%> 
+    
+  </div>
+  <div class="col-7 mt-4">
+    <h3 class="text-muted">Description</h3>
+    <div>
+      <%= emergency.description %> 
     </div>
-    <div class="col-6">
-      <div id='map' style='width: 400px; height: 300px;'></div>
-    </div>
-</div>
-
-<% if(emergency.volunteer) {%> 
-    <div class="accordion mt-5" id="accordionExample">
-        <div class="accordion-item">
-          <h2 class="accordion-header" id="headingOne">
-            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-              <strong> <%= emergency.volunteer.firstName %> <%= emergency.volunteer.lastName %></strong>
-            </button>
-          </h2>
-          <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-            <div class="accordion-body">
-                <div class="row">
-                    <div class="col-6 offset-3">
-                        <div class="card" style="width: 18rem;">
-                            <div class="card-body text-center">
-                              <h5 class="card-title"><b><%=emergency.volunteer.firstName%> <%=emergency.volunteer.lastName%></b> </h5>
-                              <p class="card-text">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eaque, esse!</p>
-                            </div>
-                            <ul class="list-group list-group-flush">
-                              <li class="list-group-item"><b>Phone</b>: <%= emergency.volunteer.phone %> </li>
-                              <li class="list-group-item"><b>Drivers.Nr:</b></li>
-                              <li class="list-group-item"><b>Address:</b></li>
-                            </ul>
-                            <div class="card-body d-flex justify-content-between">
-                             </div>
-                        </div>
-                    </div>
-                </div>
-             </div>
+    <div class="row">
+      <div class="col-8">
+        <h4 class="text-muted mt-5">More Details</h4>
+        <div class="row">
+          <div class="col-6">
+            <span class="text-muted">Created:<strong></span> <%=emergency.emergencyDate.getDate()%>.<%=emergency.emergencyDate.getMonth()+1%>.<%=emergency.emergencyDate.getFullYear()%></strong>
           </div>
+          <div class="col-6">
+            <span class="text-muted">Time:</span> <strong><%=emergency.emergencyDate.toLocaleTimeString()%></strong>
+          </div>
+          <div class="col-6 mt-3">
+            <span class="text-muted">City:</span> <strong><%= emergency.city %></strong>
+          </div>
+          <div class="col-6 mt-3">
+            <span class="text-muted">Street:</span> <strong><%= emergency.street %> </strong>
+          </div>
+          <% if(emergency.volunteer) {%>
+            <div class="col-6 mt-3">
+              <span class="text-muted">Assigned to:</span> <span class="badge rounded-pill bg-danger"><a style="color: white;" class="text-decoration-none" href="/volunteers/<%= emergency.volunteer._id %> "><%=emergency.volunteer.firstName%> <%= emergency.volunteer.lastName %> </a></span>
+            </div>
+            <!-- TODO: route for emergency completion!! -->
+            <div class="d-flex col-12 justify-content-end mt-3">
+              <button class="btn btn-sm btn-danger disabled" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Completed</button>
+            </div>
+          <% }else{ %>
+            <div class="d-flex col-12 justify-content-end mt-3">
+              <button class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Delete</button>
+            </div>
+          <% } %> 
         </div>
-<% }%> 
+      </div>
+    </div>
+
+  </div>
+</div>
 
 
 <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">

@@ -25,7 +25,11 @@ const emergencySchema = new Schema({
             type: [Number],
             required: true
           }
-    }
+    },
+    emergencyDate:{
+        type: Date,
+        default: new Date()
+    },
 })
 
 /* 
