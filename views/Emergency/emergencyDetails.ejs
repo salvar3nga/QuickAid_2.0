@@ -45,7 +45,7 @@
           </div>
           <% if(emergency.volunteer) {%>
             <div class="col-6 mt-3">
-              <span class="text-muted">Assigned to:</span> <span class="badge rounded-pill bg-danger"><a style="color: white;" class="text-decoration-none" href="/volunteers/<%= emergency.volunteer._id %> "><%=emergency.volunteer.firstName%> <%= emergency.volunteer.lastName %> </a></span>
+              <span class="text-muted">Assigned to:</span> <span class="badge rounded-pill bg-danger"><a class="text-decoration-none text-white" href="/volunteers/<%= emergency.volunteer._id %> "><%=emergency.volunteer.firstName%> <%= emergency.volunteer.lastName %> </a></span>
             </div>
             <!-- TODO: route for emergency completion!! -->
             <div class="d-flex col-12 justify-content-end mt-3">

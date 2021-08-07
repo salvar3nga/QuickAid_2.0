@@ -25,7 +25,6 @@
       <div class="input-group d-flex justify-content-center mt-5 m-auto">
         <div class="form-outline">
           <input id="search-input" placeholder="Search" type="search" id="form1" class="form-control" />
-          <!-- <label class="form-label" for="form1">Search</label> -->
         </div>
         <button id="search-button" type="button" class="btn btn-primary h-50">
           <i class="fas fa-search"></i>
@@ -61,14 +60,16 @@
     const searchButton = document.getElementById('search-button');
     const searchInput = document.getElementById('search-input');
     const extraSearch = document.getElementById('extra-search');
+    const cards = document.querySelectorAll('.volunteer-card');
+
 
     searchButton.addEventListener('click', () => {
-      
+
       search();
-      // extraSearch.classList.toggle('visually-hidden');
     });
 
     search();
+
     
     function search(){
       searchInput.addEventListener("keyup", (evt)=>{
@@ -76,42 +77,22 @@
         const searchValue = evt.target.value.toLowerCase();
         const cards = document.querySelectorAll('.volunteer-card');
 
-
         if(searchValue!= ''){
           extraSearch.classList.remove('visually-hidden'); 
-          search2();
-        }else{
+
+        }else if(searchValue==''){
           extraSearch.classList.add('visually-hidden');
           
-          cards.forEach(card=>{
-            console.log('removing...')
-            card.classList.remove('found');
-          })
+          
         }
-
 
         cards.forEach(card=>{
             card.style.display= "none";
             if(card.innerText.toLowerCase().indexOf(searchValue) > -1){
               card.style.display= "";
-              card.classList.add('found');
+              console.log(`Found ${i}`)
             }
 
-          })
-        })
-
-    }
-
-    function search2(){
-      extraSearch.addEventListener("keyup", (evt)=>{
-      
-        const searchValue = evt.target.value.toLowerCase();
-        const cards = document.querySelectorAll('.found');
-        cards.forEach(card=>{
-          card.style.display= "none";
-            if(card.innerText.toLowerCase().indexOf(searchValue) > -1){
-              card.style.display= "";
-            }
           })
         })
 

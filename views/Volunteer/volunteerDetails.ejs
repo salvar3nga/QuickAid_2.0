@@ -1,106 +1,135 @@
 <% layout('layouts/boilerplate') %>
 
 
-<h2 class="border-bottom d-flex justify-content-between">
-  <div><%=volunteer.firstName%> <strong><%=volunteer.lastName%></strong> </div>
-  <%=volunteer.registrationDate.toLocaleTimeString()%>
-  <div>
-    <a class="btn btn-sm btn-warning" href="/volunteers/<%=volunteer._id  %>/edit">Edit</a>
-    <% if(volunteer.isBusy) {%> 
-    <button class="btn btn-sm btn-danger disabled" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Delete</button>
-    <% }else{%> 
-    <button class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Delete</button>
-    <% } %> 
-  </div>
-</h2>
+  <h2 class="border-bottom d-flex justify-content-between">
+    <div>
+      <%=volunteer.firstName%> <strong>
+          <%=volunteer.lastName%>
+        </strong>
+    </div>
+    <%=volunteer.registrationDate.toLocaleTimeString()%>
+      <div>
+        <a class="btn btn-sm btn-warning" href="/volunteers/<%=volunteer._id  %>/edit">Edit</a>
+      </div>
+  </h2>
 
 
-<div class="row">
-  <div class="col-sm-6">
-    <div class="card">
-      <div class="card-body row">
-        <div class="col-12 border-bottom mb-2 pb-3">
-          <div class="d-flex justify-content-center">
-            <%= volunteer.address %> 
+  <div class="row">
+    <div class="col-sm-6">
+      <div class="card">
+        <div class="card-body row">
+          <div class="col-12 border-bottom mb-2 pb-3">
+            <div class="d-flex justify-content-center">
+              <%= volunteer.address %>
+            </div>
           </div>
-        </div>
-        <div class="col-6 border-end mt-2 pt-2">
-          <div class="d-flex justify-content-center">
+          <div class="col-6 border-end mt-2 pt-2">
+            <div class="d-flex justify-content-center">
               <div>
-                <p><%=volunteer.personalID%></p>
+                <p>
+                  <%=volunteer.personalID%>
+                </p>
                 <span class="text-muted">Personal ID</span>
               </div>
+            </div>
           </div>
-        </div>
-        <div class="col-6 border-start mt-2 pt-2">
-          <div class="d-flex justify-content-center">
+          <div class="col-6 border-start mt-2 pt-2">
+            <div class="d-flex justify-content-center">
               <div>
-                <p><%=volunteer.licenseNR  %>  </p>
+                <p>
+                  <%=volunteer.licenseNR %>
+                </p>
                 <span class="text-muted">Drivers License</span>
               </div>
+            </div>
           </div>
         </div>
+      </div>
     </div>
-  </div>
-</div>
 
-<div class="col-sm-6">
-  <div class="card">
-      <div class="card-body row">
-        <div class="col-12 border-bottom mb-2 pb-3">
-          <div class="d-flex justify-content-center">
-            Joined since: <%=volunteer.registrationDate.getDate()%>.<%=volunteer.registrationDate.getMonth()+1%>.<%=volunteer.registrationDate.getFullYear()%>
+    <div class="col-sm-6">
+      <div class="card">
+        <div class="card-body row">
+          <div class="col-12 border-bottom mb-2 pb-3">
+            <div class="d-flex justify-content-center">
+              Joined since: <%=volunteer.registrationDate.getDate()%>.<%=volunteer.registrationDate.getMonth()+1%>.
+                  <%=volunteer.registrationDate.getFullYear()%>
+            </div>
           </div>
-        </div>
-        <div class="col-6 border-end mt-2 pt-2">
-          <div class="d-flex justify-content-center">
+          <div class="col-6 border-end mt-2 pt-2">
+            <div class="d-flex justify-content-center">
               <div>
-                <p><%=volunteer.phone%></p>
+                <p>
+                  <%=volunteer.phone%>
+                </p>
                 <span class="text-muted">Phone Number</span>
               </div>
+            </div>
           </div>
-        </div>
-        <div class="col-6 border-start mt-2 pt-2">
-          <div class="d-flex justify-content-center">
+          <div class="col-6 border-start mt-2 pt-2">
+            <div class="d-flex justify-content-center">
               <div>
-                <p><%=volunteer.city%>, <%= volunteer.state.charAt(0).toUpperCase()+ volunteer.state.slice(1) %> </p>
+                <p>
+                  <%=volunteer.city%>, <%= volunteer.state.charAt(0).toUpperCase()+ volunteer.state.slice(1) %>
+                </p>
                 <span class="text-muted">City, State</span>
               </div>
+            </div>
           </div>
         </div>
-    </div>
-  </div>
-
-
-
-
-
-
-
-<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="staticBackdropLabel">Warning!</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <div class="modal-body">
-        Do you really want to delete this record? This process cannot be undone!
+
+     <div class="row ms-2">
+      <% if(volunteer.isBusy) {%> 
+        <h4 class="text-muted mt-5"><%=volunteer.firstName%> is operating following emergency in:  </h4>
+        <div class="row">
+          <div class="col-6 mt-3">
+            <span class="text-muted">Street:</span> <strong><%=volunteer.emergency[0].street %></strong>
+          </div>
+          <div class="col-6 mt-3">
+            <span class="text-muted">City:</span> <strong><%=volunteer.emergency[0].city %></strong>
+          </div>
+        </div>
+        <div class="col-6 mt-3">
+          <span class="text-muted"></span> <span class="badge  bg-danger"><a class="text-decoration-none text-white" href="/emergencies/<%=volunteer.emergency[0]._id%> ">More Details</a></span>
+        </div>
+        <div class="col-12 d-flex justify-content-end mt-3">
+          <button class="btn btn-sm btn-danger disabled" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Delete</button>
+        </div>
+      <% }else{%> 
+        <div class="col-12 d-flex justify-content-end mt-3">
+          <button class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Delete</button>
+        </div>
+      <% } %> 
+     </div>
+
+
+
+
+
+
+
+      <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="staticBackdropLabel">Warning!</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              Do you really want to delete this record? This process cannot be undone!
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+              <form class="d-inline" action="/volunteers/<%= volunteer._id%>?_method=DELETE" method="POST">
+                <button class="btn btn-danger">Delete</button>
+              </form>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-        <form class="d-inline" action="/volunteers/<%= volunteer._id%>?_method=DELETE" method="POST">
-          <button class="btn btn-danger">Delete</button>
-        </form>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-    
-
-    
-   
 
   
+    </div>
+  </div>
