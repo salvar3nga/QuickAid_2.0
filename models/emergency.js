@@ -11,6 +11,10 @@ const emergencySchema = new Schema({
         type: Boolean,
         default: false
     },
+    completed:{
+        type: Boolean,
+        default: false
+    },
     volunteer: {
         type: Schema.Types.ObjectId,
         ref:"Volunteer"

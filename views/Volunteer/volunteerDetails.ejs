@@ -6,8 +6,11 @@
       <%=volunteer.firstName%> <strong>
           <%=volunteer.lastName%>
         </strong>
+        <span class="display-6">
+          (<%= volunteer.emergencyClosed%>)
+        </span>
     </div>
-    <%=volunteer.registrationDate.toLocaleTimeString()%>
+    <!-- <%=volunteer.registrationDate.toLocaleTimeString()%> -->
       <div>
         <a class="btn btn-sm btn-warning" href="/volunteers/<%=volunteer._id  %>/edit">Edit</a>
       </div>
@@ -45,7 +48,33 @@
           </div>
         </div>
       </div>
+      <div class="row mt-3">
+        <% if(volunteer.previousEmergencies.length) {%>
+          <p>
+            <a class="btn btn-sm btn-primary" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+              Previous Emergencies
+            </a>
+            <div class="collapse" id="collapseExample">
+              <% for(let emergency of volunteer.previousEmergencies) {%>
+                <li class="list-group-item d-flex justify-content-between align-items-start">
+                  <div class="ms-2 me-auto">
+                    <div class="fw-bold mb-2">
+                      <div><%= emergency.emergencyDate.getDate() %>.<%= emergency.emergencyDate.getMonth()+1 %>.<%= emergency.emergencyDate.getFullYear() %></div>
+                    </div>
+                     <span class="d-block">Street: <%= emergency.street %>  </span>
+                     <span class="text-muted">Description: <%= emergency.description %>  </span>
+                  </div>
+                  <div>
+                    <span class="badge bg-secondary rounded-pill" style="font-size: 14px;"><%= emergency.city %></span>
+                  </div>
+                </li>
+              <% } %>  
+            </div>
+          </p>
+        <% } %>  
+      </div>
     </div>
+   
 
     <div class="col-sm-6">
       <div class="card">
@@ -102,9 +131,6 @@
         </div>
       <% } %> 
      </div>
-
-
-
 
 
 

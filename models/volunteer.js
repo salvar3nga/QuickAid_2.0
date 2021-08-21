@@ -54,17 +54,16 @@ const volunteerSchema = new Schema({
             ref: "Emergency"
         }
     ],
+    previousEmergencies:[
+        {
+            type: Schema.Types.ObjectId,
+            ref: "Emergency"
+        }
+    ],
     registrationDate:{
         type: Date,
         default: new Date()
     }
-
-    // previousEmergencies: [
-    //     {
-    //         type: Schema.Types.ObjectId,
-    //         ref: "Emergency"
-    //     }
-    // ]
 
 });
 

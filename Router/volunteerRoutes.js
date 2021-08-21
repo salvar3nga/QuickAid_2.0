@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const Volunteer = require('../models/volunteer');
+const Emergency = require('../models/emergency');
 const catchAsync = require('../helpers/catchAsync');
 const ExpressError = require('../helpers/ExpressError');
 const {volunteerValidation} = require('../helpers/joiValidation');
@@ -77,7 +78,10 @@ router.get('/volunteers/:id', catchAsync(async(req,res)=>{
 
 
     try{
-        const volunteer = await Volunteer.findById(id).populate('emergency');
+        const volunteer = await Volunteer.findById(id)
+        .populate('emergency')
+        .populate('previousEmergencies');
+
         res.render('Volunteer/volunteerDetails', {volunteer});
     }catch(err){
         req.flash('error', 'Volunteer not found');
@@ -119,11 +123,35 @@ router.put('/volunteers/:id', catchAsync(async (req, res, next) =>{
 router.delete('/volunteers/:id', catchAsync(async (req,res)=>{
     const {id} = req.params;
 
+
+    //TODO: Delete all previous emergencies as well
+    
     const deletedVolunteer = await Volunteer.findByIdAndDelete(id);
 
     res.redirect('/volunteers');
 }));
     
+
+router.post('/volunteers/:id/emergencies/:em_id', catchAsync(async(req,res)=>{
+    const {id, em_id} = req.params;
+    const updatedVolunteer = await Volunteer.findByIdAndUpdate(id, {$pull:{emergency:em_id}});
+    const emergency = await Emergency.findById(em_id);
+
+    emergency.isActive = false;
+    emergency.completed = true;
+
+    updatedVolunteer.isBusy = false;
+    updatedVolunteer.previousEmergencies.push(emergency);
+    updatedVolunteer.emergencyClosed +=1;
+
+
+    await emergency.save();
+    await updatedVolunteer.save();
+
+    res.redirect('/emergencies');
+
+    
+}))
     
 
 

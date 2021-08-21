@@ -43,13 +43,12 @@
           <div class="col-6 mt-3">
             <span class="text-muted">Street:</span> <strong><%= emergency.street %> </strong>
           </div>
-          <% if(emergency.volunteer) {%>
+          <% if(emergency.volunteer){%>
             <div class="col-6 mt-3">
               <span class="text-muted">Assigned to:</span> <span class="badge rounded-pill bg-danger"><a class="text-decoration-none text-white" href="/volunteers/<%= emergency.volunteer._id %> "><%=emergency.volunteer.firstName%> <%= emergency.volunteer.lastName %> </a></span>
             </div>
-            <!-- TODO: route for emergency completion!! -->
             <div class="d-flex col-12 justify-content-end mt-3">
-              <button class="btn btn-sm btn-danger disabled" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Completed</button>
+              <button class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#closeEmergency">Close emergency</button>
             </div>
           <% }else{ %>
             <div class="d-flex col-12 justify-content-end mt-3">
@@ -83,6 +82,28 @@
     </div>
   </div>
 </div>
+<% if(emergency.volunteer){%>
+
+  <div class="modal fade" id="closeEmergency" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">Warning!</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          Are you sure you want to close this emergency? This process is not reversible!
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+          <form class="d-inline" action="/volunteers/<%= emergency.volunteer._id %>/emergencies/<%= emergency._id %> " method="POST">
+            <button class="btn btn-danger">Close Emergency</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <% } %> 
 
 
 

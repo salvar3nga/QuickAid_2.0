@@ -36,22 +36,38 @@ const initialVolunteers = [
     {
         firstName: 'Josh',
         lastName: 'Doe',
-        phone: 1234567
+        phone: 1234567,
+        address: 'Rua da alma',
+        city: 'Bissau',
+        state: 'Bissau',
+        personalID: '123hz385',
+        licenseNR: '934hzdi28'
     },
     {
-        firstName: 'Carl',
-        lastName: 'Minoe',
-        phone: 9873546
+        firstName: 'Andre',
+        lastName: 'Morse',
+        phone: 1234567,
+        address: 'Rua da amizade',
+        city: 'Gabu',
+        state: 'Gabu',
+        personalID: '123hz385',
+        licenseNR: '934hzdi28'
     },
     {
-        firstName: 'Rebecca',
-        lastName: 'Patel',
-        phone: 7654321
+        firstName: 'Galin',
+        lastName: 'Marcos',
+        phone: 1234567,
+        address: 'Rua da fronteira',
+        city: 'Pitche',
+        state: 'Gabu',
+        personalID: '123hz385',
+        licenseNR: '934hzdi28'
     },
+    
 ];
 
 const resetDB = async() =>{
-    await Volunteer.deleteMany({});
+    // await Volunteer.deleteMany({});
 
     Volunteer.insertMany(initialVolunteers)
     .then((volunteer)=>{
