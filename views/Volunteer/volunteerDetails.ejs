@@ -6,14 +6,16 @@
       <%=volunteer.firstName%> <strong>
           <%=volunteer.lastName%>
         </strong>
-        <span class="display-6">
-          (<%= volunteer.emergencyClosed%>)
+        <span class="emergency-closed">
+          <%if(volunteer.emergencyClosed > 0 ){ %>
+              (<%= volunteer.emergencyClosed %>) 
+          <% } %>  
         </span>
     </div>
     <!-- <%=volunteer.registrationDate.toLocaleTimeString()%> -->
-      <div>
-        <a class="btn btn-sm btn-warning" href="/volunteers/<%=volunteer._id  %>/edit">Edit</a>
-      </div>
+      <!-- <div>
+        <a class="btn btn-sm btn-secondary" href="/volunteers/<%=volunteer._id  %>/edit">Edit</a>
+      </div> -->
   </h2>
 
 
@@ -52,7 +54,7 @@
         <% if(volunteer.previousEmergencies.length) {%>
           <p>
             <a class="btn btn-sm btn-primary" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
-              Previous Emergencies
+              Past Emergencies
             </a>
             <div class="collapse" id="collapseExample">
               <% for(let emergency of volunteer.previousEmergencies) {%>
@@ -81,8 +83,7 @@
         <div class="card-body row">
           <div class="col-12 border-bottom mb-2 pb-3">
             <div class="d-flex justify-content-center">
-              Joined since: <%=volunteer.registrationDate.getDate()%>.<%=volunteer.registrationDate.getMonth()+1%>.
-                  <%=volunteer.registrationDate.getFullYear()%>
+              Joined since: <%=volunteer.registrationDate.getDate()%>.<%=volunteer.registrationDate.getMonth()+1%>.<%=volunteer.registrationDate.getFullYear()%>
             </div>
           </div>
           <div class="col-6 border-end mt-2 pt-2">
@@ -120,19 +121,22 @@
           </div>
         </div>
         <div class="col-6 mt-3">
-          <span class="text-muted"></span> <span class="badge  bg-danger"><a class="text-decoration-none text-white" href="/emergencies/<%=volunteer.emergency[0]._id%> ">More Details</a></span>
+          <span class="text-muted"></span> <span class="badge bg-danger"><a class="text-decoration-none text-white" href="/emergencies/<%=volunteer.emergency[0]._id%> ">+ Details</a></span>
         </div>
         <div class="col-12 d-flex justify-content-end mt-3">
-          <button class="btn btn-sm btn-danger disabled" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Delete</button>
+          <button class="btn btn-sm btn-primary disabled" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Delete</button>
         </div>
-      <% }else{%> 
+      <% }else{%>
+         
         <div class="col-12 d-flex justify-content-end mt-3">
-          <button class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Delete</button>
+        <a class="btn btn-sm btn-secondary me-4" href="/volunteers/<%=volunteer._id  %>/edit">Edit</a>
+
+          <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Delete</button>
         </div>
       <% } %> 
      </div>
 
-
+  
 
 
       <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"

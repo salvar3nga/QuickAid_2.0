@@ -1,8 +1,11 @@
 :root{
-    --clr-primary: #2171A8;
-    --clr-primary-transparent: #2172a8f5;
-    --clr-accent: #38cfd9; 
-    --clr-white: #ececec;
+    --clr-primary: #827873;
+    --clr-primary-transparent: #8A817Cf5;
+    --clr-accent-primary: #08415C; 
+    --clr-accent-primary-transparent: #095274ea; 
+    --clr-accent-secondoray: #FFBC1F; 
+    --clr-accent-secondoray-transparent: #ffd36df8; 
+    --clr-white: #F7F5FB;
     --clr-error: #df0c0c;
     --clr-sucess: #2cbb53;
     --ff-main: 'Lato', sans-serif;
@@ -23,39 +26,81 @@ h3{
 
 body{
     margin: 0;
-    background-color: var(--clr-white);
+    background-color: #fbfbfb;
     font-family: var(--ff-secundary);
 }
 
-.container{
-    width: 90%;
-    max-width: 1500px;
-    margin: 0 auto;
+.navbar{
+    /* background-color: #95C2C4; */
+    background-color: #6DC2C5;
 }
 
-.link-cancel{
-    text-decoration: none;
+/* DETAILS VOLUNTEER */
+
+.emergency-closed{
+    font-size: 1.4rem;
+    margin-left: 1rem;
+}
+
+
+/* END DETAILS VOLUNTEER */
+.volunteer-card .card-body{
+    border: 1px solid #9b8d8d;
+}
+
+.btn-primary.disabled{
+    background-color:var(--clr-accent-primary);
+    border-color: var(--clr-accent-primary);
+    pointer-events: none;
+    opacity: .65;
+}
+
+.btn-primary{
+    background-color:var(--clr-accent-primary);
+    border-color: var(--clr-accent-primary);
+}
+
+.btn-primary:hover {
+    color: #fff;
+    background-color:var(--clr-accent-primary-transparent);
+    border-color: var(--clr-accent-primary-transparent);
+}
+
+.btn-primary:focus{
+    box-shadow: 0 0 0 .25rem --clr-accent-primary-transparent;
+}
+
+.btn-secondary.disabled{
+    color: var(--clr-accent-primary);
+    border-color: var(--clr-accent-primary);
+    pointer-events: none;
+    opacity: .65;
+}
+.btn-secondary{
+    color: var(--clr-accent-primary);
+    border-color: var(--clr-accent-primary);
+    background-color: #fff;
+}
+.btn-secondary:hover{
     color: var(--clr-white);
-    border: 1px solid --clr-error;
-    padding: .5em 2em;
-    border-radius: .3em;
-    background-color: var(--clr-error);
-    font-size: 1.1rem;
+    border-color: var(--clr-accent-primary);
+    background-color: var(--clr-accent-primary);
 }
 
-.btn{
-    font-size: 1.1rem;
-    border-radius: .3em;
-    border: .3em;
-    padding: .5em 1.5em;
-    text-decoration: none;
-    color: var(--clr-white);
-    cursor: pointer;
+.btn-edit{
+    background-color: var(--clr-accent-secondoray);
+    border-color: var(--clr-accent-secondoray);
+}
+.btn-edit:hover{
+    background-color: var(--clr-accent-secondoray-transparent);
+    border-color: var(--clr-accent-secondoray-transparent);
 }
 
-.btn-cancel{
-    background-color: var(--clr-error);
+
+.list-group-item{
+    border: 1px solid #9b8d8d;
+    position: relative;
 }
-.btn-success{
-    background-color: var(--clr-sucess);
+.list-group-item:hover{
+    top: -1.5px;
 }

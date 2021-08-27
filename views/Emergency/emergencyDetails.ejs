@@ -2,9 +2,9 @@
 
 <h2 class="border-bottom mb-3 d-flex justify-content-between">
   <div>Details</div>
-  <div>
-    <a class="btn btn-sm btn-warning" href="/emergencies/<%=emergency._id%>/edit">Edit</a>
-  </div>
+  <!-- <div>
+    <a class="btn btn-sm btn-edit" href="/emergencies/<%=emergency._id%>/edit">Edit</a>
+  </div> -->
 </h2>
 
 <div class="row">
@@ -14,10 +14,10 @@
   <div class="col-5 mt-4">
     <h3><%=emergency.street%> </h3>
     <% if(!emergency.volunteer) {%> 
-    <a class="btn btn-sm btn-success" href="/emergencies/<%=emergency._id%>/volunteers/assign">Assign</a>
+    <a class="btn btn-sm btn-primary" href="/emergencies/<%=emergency._id%>/volunteers/assign">Assign</a>
   <% }else{%>
     <form action="/emergencies/<%= emergency._id %>/volunteers/<%= emergency.volunteer._id %>?_method=PUT" method="POST">
-      <button class="btn btn-sm btn-secondary">Unassign</button>
+      <button class="btn btn-sm btn-primary">Unassign</button>
     </form>
   <% }%> 
     
@@ -48,11 +48,13 @@
               <span class="text-muted">Assigned to:</span> <span class="badge rounded-pill bg-danger"><a class="text-decoration-none text-white" href="/volunteers/<%= emergency.volunteer._id %> "><%=emergency.volunteer.firstName%> <%= emergency.volunteer.lastName %> </a></span>
             </div>
             <div class="d-flex col-12 justify-content-end mt-3">
-              <button class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#closeEmergency">Close emergency</button>
+              <a class="btn btn-sm btn-secondary me-4" href="/emergencies/<%=emergency._id%>/edit">Edit</a>
+              <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#closeEmergency">Close emergency</button>
             </div>
           <% }else{ %>
             <div class="d-flex col-12 justify-content-end mt-3">
-              <button class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Delete</button>
+              <a class="btn btn-sm btn-secondary me-4" href="/emergencies/<%=emergency._id%>/edit">Edit</a>
+              <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Delete</button>
             </div>
           <% } %> 
         </div>

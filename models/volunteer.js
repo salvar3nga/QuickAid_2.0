@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const {Schema} = mongoose;
-
+const Emergency = require('./emergency');
 
 
 const volunteerSchema = new Schema({
@@ -66,5 +66,16 @@ const volunteerSchema = new Schema({
     }
 
 });
+
+// Delete all previous emergencies after a volunteer has been removed
+volunteerSchema.post('findOneAndDelete', async function(volunteer){
+    if(volunteer){
+        await Emergency.deleteMany({
+            _id:{
+                $in: volunteer.previousEmergencies
+            }
+        })
+    }
+})
 
 module.exports = mongoose.model('Volunteer', volunteerSchema);

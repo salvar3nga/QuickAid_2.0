@@ -1,11 +1,11 @@
 <% layout('layouts/boilerplate') %>
 <div class="d-flex">
   <div class="col">
-    <h1 class=>Choose Volunteer</h1>
+    <h1 class="border-bottom mb-5">Choose Volunteer</h1>
   </div>
-  <div class="col d-flex justify-content-between">
-    <a class="btn btn-info mb-5" href="/emergencies/<%= id %> ">Back</a>
-  </div>
+  <!-- <div class="col d-flex justify-content-between">
+    <a class="btn btn-sm btn-info mb-5" href="/emergencies/<%= id %> ">Back</a>
+  </div> -->
 </div>
 
 
@@ -16,22 +16,28 @@
           <div class="col">
               <div class="card h-100 border-danger">
                 <div class="card-body">
-                  <h5 class="card-title"><%=v.firstName%> <%=v.lastName%></h5>
-                  <p class="card-text">Phone: <%= v.phone %> </p>
+                  <div class="d-flex justify-content-between">
+                      <h5 class="card-title"><%=v.firstName%> <%=v.lastName%></h5>
+                      <span class="text-muted"><%= v.city %></span>
+                    </div>
+                    <p class="card-text"><b>Tel:</b> <%= v.phone %> </p>
                   <form class="d-inline" action="/emergencies/<%=id%>/volunteers/<%=v._id%> " method="POST">
-                      <button class="btn btn-secondary disabled">Assign</button>
+                      <button class="btn btn-primary disabled">Assign</button>
                   </form>
                 </div> 
               </div>
           </div>  
       <% }else{ %>   
-        <div class="col">
+        <div class="col volunteer-card">
           <div class="card h-100">
             <div class="card-body">
-              <h5 class="card-title"><%=v.firstName%> <%=v.lastName%></h5>
-              <p class="card-text">Phone: <%= v.phone %> </p>
+              <div class="d-flex justify-content-between">
+                <h5 class="card-title"><%=v.firstName%> <%=v.lastName%></h5>
+                <span class="text-muted"><%= v.city %></span>
+              </div>
+              <p class="card-text"><b>Tel:</b> <%= v.phone %> </p>
               <form class="d-inline" action="/emergencies/<%=id%>/volunteers/<%=v._id%> " method="POST">
-                  <button class="btn btn-success">Assign</button>
+                  <button class="btn btn-sm btn-primary">Assign</button>
               </form>
             </div> 
           </div>
