@@ -35,6 +35,14 @@ body{
     background-color: #6DC2C5;
 }
 
+.navbar-dark .navbar-nav .nav-link{
+    color: #fff;
+}
+
+.navbar-expand-lg .navbar-collapse{
+    justify-content: flex-end;
+}
+
 /* DETAILS VOLUNTEER */
 
 .emergency-closed{

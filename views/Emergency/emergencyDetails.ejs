@@ -43,6 +43,7 @@
           <div class="col-6 mt-3">
             <span class="text-muted">Street:</span> <strong><%= emergency.street %> </strong>
           </div>
+          
           <% if(emergency.volunteer){%>
             <div class="col-6 mt-3">
               <span class="text-muted">Assigned to:</span> <span class="badge rounded-pill bg-danger"><a class="text-decoration-none text-white" href="/volunteers/<%= emergency.volunteer._id %> "><%=emergency.volunteer.firstName%> <%= emergency.volunteer.lastName %> </a></span>
@@ -76,9 +77,9 @@
         Do you really want to delete this record? This process cannot be undone!
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">Cancel</button>
         <form class="d-inline" action="/emergencies/<%= emergency._id%>?_method=DELETE" method="POST">
-          <button class="btn btn-danger">Delete</button>
+          <button class="btn btn-sm btn-primary">Delete</button>
         </form>
       </div>
     </div>
@@ -97,9 +98,9 @@
           Are you sure you want to close this emergency? This process is not reversible!
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+          <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">Cancel</button>
           <form class="d-inline" action="/volunteers/<%= emergency.volunteer._id %>/emergencies/<%= emergency._id %> " method="POST">
-            <button class="btn btn-danger">Close Emergency</button>
+            <button class="btn btn-sm btn-primary">Close Emergency</button>
           </form>
         </div>
       </div>
