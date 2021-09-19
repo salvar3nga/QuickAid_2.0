@@ -20,7 +20,8 @@
 
 h1,
 h2,
-h3{
+h3,
+h4{
     font-family: var(--ff-main);
 }
 
@@ -55,6 +56,8 @@ body{
 .volunteer-card .card-body{
     border: 1px solid #9b8d8d;
 }
+
+/* BUTTONS STYLES */
 
 .btn-primary.disabled{
     background-color:var(--clr-accent-primary);
@@ -105,10 +108,16 @@ body{
 }
 
 
+/* END BUTTONS STYLES */
+
+
 .list-group-item{
     border: 1px solid #9b8d8d;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.3);
     position: relative;
 }
 .list-group-item:hover{
-    top: -1.5px;
+    top: -1px;
+    box-shadow: 0 3px 6px rgba(33,33,33, 0.2);
+
 }
