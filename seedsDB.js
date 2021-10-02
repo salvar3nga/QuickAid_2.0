@@ -67,7 +67,7 @@ const initialVolunteers = [
 ];
 
 const resetDB = async() =>{
-    // await Volunteer.deleteMany({});
+    await Volunteer.deleteMany({});
 
     Volunteer.insertMany(initialVolunteers)
     .then((volunteer)=>{

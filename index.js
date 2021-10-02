@@ -9,6 +9,10 @@ const execute = () =>{
     const path = require('path');
     const volunteerRouter = require('./Router/volunteerRoutes');
     const emergencyRouter = require('./Router/emergencyRoutes');
+
+    const userModel = require('./models/user');
+
+
     const mongoose = require('mongoose');
     const methodOverride = require('method-override');
     const ejsMate = require('ejs-mate');
@@ -16,6 +20,8 @@ const execute = () =>{
     const flash = require('connect-flash');
 
     const session = require('express-session');
+    const passport = require('passport');
+    const localStrategy = require('passport-local');
 
     const port = process.env.PORT || 3030;
 
@@ -27,6 +33,7 @@ const execute = () =>{
     app.set('view engine', 'ejs');
 
     mongoose.set('useFindAndModify', false);
+    mongoose.set('useCreateIndex', true);
 
   
 
@@ -47,6 +54,13 @@ const execute = () =>{
     }
     app.use(session(sessionConfig)); 
     app.use(flash());
+
+    app.use(passport.initialize());
+    app.use(passport.session());
+
+    passport.use(new localStrategy(userModel.authenticate()));
+    passport.serializeUser(userModel.serializeUser());
+    passport.deserializeUser(userModel.deserializeUser());
 
     app.use((req,res,next)=>{
         res.locals.success = req.flash('success');

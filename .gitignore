@@ -1,5 +1,6 @@
 .env
 node_modules
 seedsDB.js
+userSeed.js
 testkey
 testkey.pub
