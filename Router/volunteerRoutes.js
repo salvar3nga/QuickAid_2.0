@@ -3,6 +3,7 @@ const Volunteer = require('../models/volunteer');
 const Emergency = require('../models/emergency');
 const catchAsync = require('../helpers/catchAsync');
 const ExpressError = require('../helpers/ExpressError');
+const {isLoggedIn} = require('../helpers/middleware');
 const {volunteerValidation} = require('../helpers/joiValidation');
 const methodOverride = require('method-override');
 
@@ -38,19 +39,22 @@ router.get("/", (req, res)=>{
 })
 
 
-router.get('/volunteers', catchAsync(async (req,res)=>{
+router.get('/volunteers', isLoggedIn, catchAsync(async (req,res)=>{
     //Query for all volunteers    
     const volunteers = await Volunteer.find({});
     res.render('Volunteer/volunteers', {volunteers});
 }));
 
 // Form to create a new volunteer
-router.get('/volunteers/new', (req,res)=>{
-
+router.get('/volunteers/new', isLoggedIn, (req,res)=>{
+    if(!req.isAuthenticated()){
+        req.flash('error', 'Something went wrong, please sign in!')
+        return res.redirect('/login');
+    }
     res.render('Volunteer/newVolunteer', {states});
 });
 
-router.post('/volunteers', validateVolunteer, catchAsync(async (req, res)=>{
+router.post('/volunteers', isLoggedIn, validateVolunteer, catchAsync(async (req, res)=>{
     
     
     const newVolunteer = new Volunteer(req.body.volunteer);
@@ -64,7 +68,7 @@ router.post('/volunteers', validateVolunteer, catchAsync(async (req, res)=>{
 }));
 
 
-router.get('/volunteers/:id', catchAsync(async(req,res)=>{
+router.get('/volunteers/:id', isLoggedIn, catchAsync(async(req,res)=>{
     const {id} = req.params;
 
     // const volunteer = await Volunteer.findById(id).populate('emergency');
@@ -94,7 +98,7 @@ router.get('/volunteers/:id', catchAsync(async(req,res)=>{
 
 }));
 
-router.get('/volunteers/:id/edit', catchAsync(async (req,res)=>{
+router.get('/volunteers/:id/edit', isLoggedIn, catchAsync(async (req,res)=>{
     const {id} = req.params;
     const volunteer = await Volunteer.findById(id);
     res.render('Volunteer/editVolunteer', {volunteer, states});
@@ -102,7 +106,7 @@ router.get('/volunteers/:id/edit', catchAsync(async (req,res)=>{
 
 /* PUT and DELETE REQUESTS ARE CURRENTLY SERVED ON INDEX JS */
 
-router.put('/volunteers/:id', catchAsync(async (req, res, next) =>{
+router.put('/volunteers/:id', isLoggedIn, catchAsync(async (req, res, next) =>{
     const {id} = req.params;
 
     try{
@@ -120,7 +124,7 @@ router.put('/volunteers/:id', catchAsync(async (req, res, next) =>{
 }));
 
 
-router.delete('/volunteers/:id', catchAsync(async (req,res)=>{
+router.delete('/volunteers/:id', isLoggedIn, catchAsync(async (req,res)=>{
     const {id} = req.params;
 
 
@@ -132,7 +136,7 @@ router.delete('/volunteers/:id', catchAsync(async (req,res)=>{
 }));
     
 
-router.post('/volunteers/:id/emergencies/:em_id', catchAsync(async(req,res)=>{
+router.post('/volunteers/:id/emergencies/:em_id', isLoggedIn, catchAsync(async(req,res)=>{
     const {id, em_id} = req.params;
     const updatedVolunteer = await Volunteer.findByIdAndUpdate(id, {$pull:{emergency:em_id}});
     const emergency = await Emergency.findById(em_id);
