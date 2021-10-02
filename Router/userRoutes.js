@@ -15,8 +15,8 @@ router.get('/login', (req,res)=>{
 });
 
 router.post('/login', passport.authenticate('local', {failureFlash: true, failureRedirect: '/login'}), (req,res)=>{
-    req.flash('success', 'Welcome');
     const redirectURL = req.session.returnToURL || '/volunteers'
+    delete req.session.returnToURL;
     res.redirect(redirectURL)
 });
 
