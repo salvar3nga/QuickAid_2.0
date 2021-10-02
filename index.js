@@ -9,7 +9,7 @@ const execute = () =>{
     const path = require('path');
     const volunteerRouter = require('./Router/volunteerRoutes');
     const emergencyRouter = require('./Router/emergencyRoutes');
-
+    const userRouter = require('./Router/userRoutes');
     const userModel = require('./models/user');
 
 
@@ -70,6 +70,7 @@ const execute = () =>{
     
     app.use(volunteerRouter);
     app.use(emergencyRouter);
+    app.use(userRouter);
     
     
     
