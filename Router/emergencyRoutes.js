@@ -5,6 +5,8 @@ const ExpressError = require('../helpers/ExpressError');
 const catchAsync = require('../helpers/catchAsync');
 const methodOverride = require('method-override');
 const { findByIdAndUpdate } = require('../models/emergency');
+const {isLoggedIn} = require('../helpers/middleware');
+
 const dotenv = require('dotenv').config();
 
 const mapBoxGeocode = require('@mapbox/mapbox-sdk/services/geocoding');
@@ -24,7 +26,7 @@ router.use(methodOverride('_method'));
 
 //EMERGENCY ROUTES
 
-router.get("/emergencies", async (req,res)=>{
+router.get("/emergencies", isLoggedIn, async (req,res)=>{
     const emergencies = await Emergency.find({}).populate('volunteer')
     
     res.render('Emergency/emergencies', {emergencies});
@@ -32,7 +34,7 @@ router.get("/emergencies", async (req,res)=>{
 
 
 
-router.post("/emergencies", async (req, res)=>{
+router.post("/emergencies", isLoggedIn, async (req, res)=>{
 
     const geoData = await geocoder.forwardGeocode({
         query: `${req.body.emergency.city}, GW-BS`,
@@ -49,18 +51,18 @@ router.post("/emergencies", async (req, res)=>{
     res.redirect(`/emergencies/${emergency._id}`);
 });
 
-router.get("/emergencies/new", (req, res)=>{
+router.get("/emergencies/new", isLoggedIn, (req, res)=>{
     res.render('Emergency/newEmergency');
 });
 
-router.get("/emergencies/:id", async (req,res)=>{
+router.get("/emergencies/:id", isLoggedIn, async (req,res)=>{
     const {id} = req.params;
 
     const emergency = await Emergency.findById(id).populate('volunteer');
     res.render('Emergency/emergencyDetails', {emergency});
 })
 
-router.get("/emergencies/:id/edit", async(req,res)=>{
+router.get("/emergencies/:id/edit", isLoggedIn, async(req,res)=>{
     const {id} = req.params;
 
     const emergency = await Emergency.findById(id);
@@ -68,7 +70,7 @@ router.get("/emergencies/:id/edit", async(req,res)=>{
     res.render('Emergency/editEmergency', {emergency});
 });
 
-router.get("/emergencies/:id/volunteers/assign", async (req,res)=>{
+router.get("/emergencies/:id/volunteers/assign", isLoggedIn, async (req,res)=>{
     const {id} = req.params;
 
     const volunteers = await Volunteer.find({});
@@ -84,7 +86,7 @@ router.get("/emergencies/:id/volunteers/assign", async (req,res)=>{
 
     //ASSIGN
 
-router.post("/emergencies/:id/volunteers/:vol_id", async (req, res)=>{
+router.post("/emergencies/:id/volunteers/:vol_id", isLoggedIn, async (req, res)=>{
     const {id, vol_id} = req.params;
 
     const emergency = await Emergency.findById(id);
@@ -111,7 +113,7 @@ router.post("/emergencies/:id/volunteers/:vol_id", async (req, res)=>{
 
 });
 
-router.put('/emergencies/:id', catchAsync(async(req,res, next)=>{
+router.put('/emergencies/:id', isLoggedIn, catchAsync(async(req,res, next)=>{
     const {id} = req.params;
 
     const updatedEmergency = await Emergency.findByIdAndUpdate(id, {...req.body.emergency});
@@ -119,7 +121,7 @@ router.put('/emergencies/:id', catchAsync(async(req,res, next)=>{
     res.redirect(`/emergencies/${updatedEmergency._id}`);
 }));
 //Unassign
-router.put('/emergencies/:id/volunteers/:vol_id', catchAsync(async(req,res, next)=>{
+router.put('/emergencies/:id/volunteers/:vol_id', isLoggedIn, catchAsync(async(req,res, next)=>{
     const {id, vol_id} = req.params;
 
     const updatedVolunteer = await Volunteer.findByIdAndUpdate(vol_id, {$pull:{emergency: id}});
@@ -137,7 +139,7 @@ router.put('/emergencies/:id/volunteers/:vol_id', catchAsync(async(req,res, next
     
 }));
 
-router.delete('/emergencies/:id', catchAsync(async (req,res)=>{
+router.delete('/emergencies/:id', isLoggedIn, catchAsync(async (req,res)=>{
     const {id} = req.params;
 
      await Emergency.findByIdAndDelete(id);
