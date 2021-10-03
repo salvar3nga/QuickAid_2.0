@@ -11,9 +11,11 @@ const execute = () =>{
     const emergencyRouter = require('./Router/emergencyRoutes');
     const userRouter = require('./Router/userRoutes');
     const userModel = require('./models/user');
+    const helmet = require('helmet');
 
 
     const mongoose = require('mongoose');
+    const mongoSanitize = require('express-mongo-sanitize');
     const methodOverride = require('method-override');
     const ejsMate = require('ejs-mate');
     const ExpressError = require('./helpers/ExpressError');
@@ -41,21 +43,25 @@ const execute = () =>{
     app.use(express.json());
     app.use(express.urlencoded({extended: true}))
     app.use(methodOverride('_method'));
+    app.use(mongoSanitize());
     
     const sessionConfig ={
+        name: 'session',
         secret: 'changeMe',
         resave: false,
         saveUninitialized: true,
         cookie:{
             httpOnly: true,
+            // secure: true,
             expires: Date.now() + 1000*60*60*24*7,
             maxAge: 1000*60*60*24*7
         }
     }
     app.use(session(sessionConfig)); 
     app.use(flash());
+    app.use(helmet({contentSecurityPolicy: false}));
 
-    app.use(passport.initialize());
+    app.use(fpassport.initialize());
     app.use(passport.session());
 
     passport.use(new localStrategy(userModel.authenticate()));
