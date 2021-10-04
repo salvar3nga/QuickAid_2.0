@@ -61,7 +61,7 @@ const execute = () =>{
     app.use(flash());
     app.use(helmet({contentSecurityPolicy: false}));
 
-    app.use(fpassport.initialize());
+    app.use(passport.initialize());
     app.use(passport.session());
 
     passport.use(new localStrategy(userModel.authenticate()));
