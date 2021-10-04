@@ -22,10 +22,13 @@ const execute = () =>{
     const flash = require('connect-flash');
 
     const session = require('express-session');
+    const MongoStore = require('connect-mongo');
     const passport = require('passport');
     const localStrategy = require('passport-local');
 
     const port = process.env.PORT || 3030;
+    const MONGO_DB = process.env.MONGO_DB || 'mongodb://localhost:27017/quickAid';
+    const secret = process.env.SECRET || 'changeMe'
 
   
 
@@ -44,10 +47,22 @@ const execute = () =>{
     app.use(express.urlencoded({extended: true}))
     app.use(methodOverride('_method'));
     app.use(mongoSanitize());
+
+    const store = new MongoStore({
+        useUnifiedTopology: true,
+        mongoUrl: MONGO_DB,
+        secret: secret,
+        touchAfter: 24 * 60 * 60,
+    });
+
+    store.on('error', function(e){
+        console.log('+++ERROR WHILE STORING SESSION+++', e);
+    })
     
     const sessionConfig ={
+        store,
         name: 'session',
-        secret: 'changeMe',
+        secret: secret,
         resave: false,
         saveUninitialized: true,
         cookie:{
@@ -81,8 +96,9 @@ const execute = () =>{
     
     
     
-    //Connect to the DB
-    mongoose.connect(process.env.DATABASE, 
+    //Connect to the DB MONGO_DB
+
+    mongoose.connect(MONGO_DB, 
         {useNewUrlParser: true, useUnifiedTopology: true })
         .then(()=>{
             console.log('...CONNECTED TO DATABASE');
