@@ -1,0 +1,59 @@
+<% layout('layouts/boilerplate') %>
+
+<h1 class="text-center mb-5">New User</h1>
+<div class="col-6 offset-3">
+    
+    <form class="row g-3 mb-5 form-validation" action="/register" method="POST" novalidate>
+         <div class="col-md-12">
+             <label for="name" class="form-label">Name</label>
+             <input type="text" class="form-control" id="name" name="name" placeholder="name" required>
+             <div class="invalid-feedback">
+                 Please provide a name.
+             </div>
+         </div>
+         <div class="col-md-12">
+             <label for="username" class="form-label">Username (for login)</label>
+             <input type="text" class="form-control" id="username" name="username" placeholder="u_name" required>
+             <div class="invalid-feedback">
+                 Please provide a name.
+             </div>
+         </div>
+         <div class="col-md-12">
+            <label for="inputPhone" class="form-label">Phone</label>
+            <input type="number" class="form-control" id="inputPhone" name="phone" placeholder="phone">
+        </div>
+         <div class="col-12">
+             <label for="inputAddress" class="form-label">Address</label>
+             <input type="text" class="form-control" id="inputAddress" name="address" placeholder="1234 Main Str">
+             <div class="invalid-feedback">
+                 Please provide an address.
+             </div>
+         </div>
+         <div class="col-md-12">
+             <label for="inputCity" class="form-label">City</label>
+             <input type="text" class="form-control" id="inputCity" name="city" placeholder="City">
+             <div class="invalid-feedback">
+                 Please provide a city.
+             </div>
+         </div>
+         <div class="col-md-12">
+             <label for="password" class="form-label">Password (for login)</label>
+             <input type="password" class="form-control" id="password" name="password" placeholder="password" required>
+             <div class="invalid-feedback">
+                 Please provide a password.
+             </div>
+         </div>
+         <div class="col-12 mt-4">
+         <div class="form-check">
+             <input class="form-check-input" type="checkbox" id="superAdmin" name="superAdmin">
+             <label class="form-check-label" for="superAdmin">
+             Is Super-Admin?
+             </label>
+         </div>
+         </div>
+         <div class="col-12 d-flex justify-content-end">
+             <a class="btn btn-sm btn-secondary me-4" href="/volunteers">Cancel</a>
+             <button class="btn btn-sm btn-primary">Add</button>
+         </div>
+    </form>
+</div>

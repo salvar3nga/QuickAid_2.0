@@ -23,6 +23,10 @@
                 <li><a class="dropdown-item" href="/emergencies/new"> Emergency</a></li>
                 <li><hr class="dropdown-divider"></li>
                 <li><a class="dropdown-item" href="/volunteers/new">Volunteer</a></li>
+                <% if(currentUser.superAdmin){ %> 
+                  <li><hr class="dropdown-divider"></li>
+                  <li><a class="dropdown-item" href="/register">User</a></li>
+                <% } %> 
               </ul>
             </li>
             <li class="nav-item">
