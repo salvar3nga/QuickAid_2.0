@@ -1,3 +1,14 @@
 {
-    "goodMorning": "Bom Dia"
+    "name": "nome",
+    "username": "nome do usuario",
+    "phone": "tel",
+    "address": "endereco",
+    "city": "cidade",
+    "password": "palavra passe",
+    "confirm_password": "confirme a  palavra passe",
+    "cancel": "cancelar",
+    "add": "adicionar",
+    "is_super_admin": "super administrador",
+    "new_user": "novo usuario"
+
 }

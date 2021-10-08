@@ -12,6 +12,8 @@ router.use(methodOverride('_method'));
 
 
 router.get('/register', isLoggedIn, (req,res)=>{
+
+
     res.render('Users/register');
 });
 
@@ -34,7 +36,7 @@ router.post('/register', isLoggedIn, verifyPasswordMatching, catchAsync(async(re
 
 router.get('/greet', (req,res)=>{
     const language = req.language;
-    // console.log(req.i18n.exists('goodMorning'))
+    // const greeting = res.__('goodMorning')
     const response = req.t('goodMorning');
     res.send(response);
 })

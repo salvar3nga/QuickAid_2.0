@@ -1,3 +1,13 @@
 {
-    "goodMorning": "Good Morning"
+    "name": "name",
+    "username": "username",
+    "phone": "phone",
+    "address": "address",
+    "city": "city",
+    "password": "password",
+    "confirm_password": "confirm password",
+    "cancel": "cancel",
+    "add": "add",
+    "is_super_admin": "super admin",
+    "new_user": "new user"
 }
