@@ -27,7 +27,7 @@ const execute = () =>{
     const localStrategy = require('passport-local');
 
     const port = process.env.PORT || 3000;
-    const MONGO_DB = process.env.MONGO_DB || 'mongodb://localhost:27017/quickAid';
+    const DEV_DB = process.env.DATABASE;
     const secret = process.env.SECRET || 'changeMe'
 
   
@@ -50,7 +50,7 @@ const execute = () =>{
 
     const store = new MongoStore({
         useUnifiedTopology: true,
-        mongoUrl: MONGO_DB,
+        mongoUrl: DEV_DB,
         secret: secret,
         touchAfter: 24 * 60 * 60,
     });
@@ -96,9 +96,9 @@ const execute = () =>{
     
     
     
-    //Connect to the DB MONGO_DB
+    //Connect to the DB DEV_DB
 
-    mongoose.connect(MONGO_DB, 
+    mongoose.connect(DEV_DB, 
         {useNewUrlParser: true, useUnifiedTopology: true })
         .then(()=>{
             console.log('...CONNECTED TO DATABASE');
