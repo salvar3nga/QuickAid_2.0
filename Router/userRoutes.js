@@ -24,7 +24,6 @@ router.post('/register', isLoggedIn, verifyPasswordMatching, catchAsync(async(re
         
         const newAdmin = new User({name, username, phone, address, city, superAdmin});
         const registeredUser = await User.register(newAdmin, password)
-        console.log(registeredUser);
         req.flash('success', 'Successfully created a new user')
         res.redirect('/volunteers');
     }catch(err){
@@ -33,6 +32,12 @@ router.post('/register', isLoggedIn, verifyPasswordMatching, catchAsync(async(re
     }
 }));
 
+router.get('/greet', (req,res)=>{
+    const language = req.language;
+    // console.log(req.i18n.exists('goodMorning'))
+    const response = req.t('goodMorning');
+    res.send(response);
+})
 
 router.get('/login', (req,res)=>{
     res.render('Users/login');

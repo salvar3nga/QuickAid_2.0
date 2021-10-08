@@ -26,6 +26,10 @@ const execute = () =>{
     const passport = require('passport');
     const localStrategy = require('passport-local');
 
+    const i18next = require('i18next');
+    const backendI18 = require('i18next-fs-backend');
+    const i18NextMiddleware = require('i18next-http-middleware');
+
     const port = process.env.PORT || 3000;
     const DEV_DB = process.env.MONGO_DB || 'mongodb://localhost:27017/quickAid'
     const secret = process.env.SECRET || 'changeMe'
@@ -39,6 +43,18 @@ const execute = () =>{
 
     mongoose.set('useFindAndModify', false);
     mongoose.set('useCreateIndex', true);
+
+
+    i18next
+        .use(backendI18)
+        .use(i18NextMiddleware.LanguageDetector)
+        .init({
+            backend: {
+                loadPath: './I18n/locales/{{lng}}/{{ns}}.json'
+            },
+            fallbackLng: 'en',
+            preload: ['en', 'pt']
+        });
 
   
 
@@ -78,12 +94,14 @@ const execute = () =>{
 
     app.use(passport.initialize());
     app.use(passport.session());
+    app.use(i18NextMiddleware.handle(i18next));
+
 
     passport.use(new localStrategy(userModel.authenticate()));
     passport.serializeUser(userModel.serializeUser());
     passport.deserializeUser(userModel.deserializeUser());
 
-    app.use((req,res,next)=>{
+    app.use((req,res, next)=>{
         res.locals.currentUser = req.user;
         res.locals.success = req.flash('success');
         res.locals.error = req.flash('error');
@@ -93,6 +111,7 @@ const execute = () =>{
     app.use(volunteerRouter);
     app.use(emergencyRouter);
     app.use(userRouter);
+
     
     
     
