@@ -50,7 +50,7 @@ const execute = () =>{
         .use(i18NextMiddleware.LanguageDetector)
         .init({
             backend: {
-                loadPath: './I18n/locales/{{lng}}/{{ns}}.json'
+                loadPath: path.join(__dirname, './I18n/locales/{{lng}}/{{ns}}.json')
             },
             fallbackLng: 'en',
             preload: ['en', 'pt']

@@ -1,72 +1,38 @@
 <% layout('layouts/boilerplate') %>
 
-<!-- <div class="row">
-    <h1 class="text-center mb-5">Edit Volunteer</h1>
-    <div class="col-6 offset-3">
-        <form action="/volunteers/<%= volunteer._id%>?_method=PUT " method="POST" class="form-validation" novalidate>
-            <div class="mb-3">
-                <label class="form-label" for="name">Firts name</label>
-                <input class="form-control" type="text" id="name" name="volunteer[firstName]" placeholder="first name" value="<%=volunteer.firstName%>" required>
-                <div class="invalid-feedback">
-                    Please provide a name.
-                </div>
-            </div>
-            <div class="mb-3">
-                <label class="form-label" for="lastname">Last name</label>
-                <input class="form-control" type="text" id="lastname" name="volunteer[lastName]" placeholder="last name" value="<%=volunteer.lastName%>" required>
-                <div class="invalid-feedback">
-                    Please provide a name.
-                </div>
-            </div>
-            <div class="mb-3">
-                <label class="form-label" for="phone">Phone</label>
-                <input class="form-control" type="number" id="phone" name="volunteer[phone]" placeholder="phone" value="<%=volunteer.phone%>" required>
-                <div class="invalid-feedback">
-                     Please provide a phone number.
-                </div>
-            </div>
-            <div class="mb-3 d-flex justify-content-around">
-                <a class="btn btn-danger" href="/volunteers/<%= volunteer._id %> ">Cancel</a>
-                <button class="btn btn-success">Save</button>
-            </div>
-        </form>
- 
-    </div>
-</div> -->
-
-<h1 class="text-center mb-5">Edit Volunteer</h1>
+<h1 class="text-center mb-5"><%= t('edit_volunteer') %> </h1>
 
 <form class="row g-3 mb-5 form-validation" action="/volunteers/<%= volunteer._id%>?_method=PUT" method="POST" novalidate>
     <div class="col-md-6">
-        <label for="name" class="form-label">First Name</label>
-        <input type="text" class="form-control" id="name" name="volunteer[firstName]" placeholder="first name" value="<%=volunteer.firstName%>" required>
+        <label for="name" class="form-label"><%= t('first_name') %> </label>
+        <input type="text" class="form-control" id="name" name="volunteer[firstName]" placeholder="<%= t('first_name') %>" value="<%=volunteer.firstName%>" required>
         <div class="invalid-feedback">
             Please provide a valid name.
         </div>
     </div>
     <div class="col-md-6">
-        <label for="lastname" class="form-label">Last Name</label>
-        <input type="text" class="form-control" id="lastname" name="volunteer[lastName]" placeholder="last name" value="<%=volunteer.lastName%>" required>
+        <label for="lastname" class="form-label"><%= t('last_name') %></label>
+        <input type="text" class="form-control" id="lastname" name="volunteer[lastName]" placeholder="<%= t('last_name') %>" value="<%=volunteer.lastName%>" required>
         <div class="invalid-feedback">
             Please provide a valid name.
         </div>
     </div>
     <div class="col-12">
-        <label for="inputAddress" class="form-label">Address</label>
+        <label for="inputAddress" class="form-label"><%= t('address') %></label>
         <input type="text" class="form-control" id="inputAddress" name="volunteer[address]" placeholder="1234 Main Str" value="<%=volunteer.address%>" required>
         <div class="invalid-feedback">
             Please provide a valid address.
         </div>
     </div>
     <div class="col-md-6">
-        <label for="inputCity" class="form-label">City</label>
-        <input type="text" class="form-control" id="inputCity" name="volunteer[city]" placeholder="City" value="<%=volunteer.city%>" required >
+        <label for="inputCity" class="form-label"><%= t('city') %></label>
+        <input type="text" class="form-control" id="inputCity" name="volunteer[city]" placeholder="<%= t('city') %>" value="<%=volunteer.city%>" required >
         <div class="invalid-feedback">
-            Please provide a valid address.
+            Please provide a valid city.
         </div>
     </div>
     <div class="col-md-6">
-      <label for="inputState" class="form-label">State</label>
+      <label for="inputState" class="form-label"><%= t('state') %></label>
       <select id="inputState" class="form-select" name="volunteer[state]" value="<%=volunteer.state%>" required >
         <% for (state of states) {%> 
             <option value="<%= state %>" <%= volunteer.state === state ? 'selected' : '' %>  ><%= state.charAt(0).toUpperCase()+ state.slice(1) %></option>
@@ -74,21 +40,21 @@
     </select>
     </div>
     <div class="col-md-6">
-        <label for="inputPhone" class="form-label">Phone</label>
-        <input type="number" class="form-control" id="inputPhone" name="volunteer[phone]" placeholder="phone" value="<%=volunteer.phone%>" required>
+        <label for="inputPhone" class="form-label"><%= t('phone') %></label>
+        <input type="number" class="form-control" id="inputPhone" name="volunteer[phone]" placeholder="<%= t('phone') %>" value="<%=volunteer.phone%>" required>
       </div>
       <div class="col-md-6">
-        <label for="Birthday" class="form-label">Birthday</label>
+        <label for="Birthday" class="form-label"><%= t('birthday') %></label>
         <input type="date" class="form-control" id="Birthday" name="volunteer[birthday]" value="<%=volunteer.birthday%>">
       </div>
       
       <div class="col-md-6">
-        <label for="inputID" class="form-label">Personal ID</label>
+        <label for="inputID" class="form-label"><%= t('personal_ID') %></label>
         <input type="text" class="form-control" id="inputID" name="volunteer[personalID]" placeholder="ID" value="<%=volunteer.personalID%>" required>
       </div>
       <div class="col-md-6">
-        <label for="inputLicense" class="form-label">Drivers-license</label>
-        <input type="text" class="form-control" id="inputLicense" name="volunteer[licenseNR]" placeholder="phone" value="<%=volunteer.licenseNR%>" required>
+        <label for="inputLicense" class="form-label"><%= t('drivers_license') %></label>
+        <input type="text" class="form-control" id="inputLicense" name="volunteer[licenseNR]" placeholder="<%= t('drivers_license') %>" value="<%=volunteer.licenseNR%>" required>
       </div>
     <!-- <div class="col-12">
       <div class="form-check">
@@ -99,8 +65,8 @@
       </div>
     </div> -->
     <div class="col-12 d-flex justify-content-end">
-        <a class="btn btn-sm btn-secondary me-4" href="/volunteers/<%= volunteer._id %> ">Cancel</a>
-        <button class="btn btn-sm btn-primary">Save</button>
+        <a class="btn btn-sm btn-secondary me-4" href="/volunteers/<%= volunteer._id %> "><%= t('cancel') %></a>
+        <button class="btn btn-sm btn-primary"><%= t('save') %></button>
     </div>
   </form>
     

@@ -12,10 +12,6 @@
           <% } %>  
         </span>
     </div>
-    <!-- <%=volunteer.registrationDate.toLocaleTimeString()%> -->
-      <!-- <div>
-        <a class="btn btn-sm btn-secondary" href="/volunteers/<%=volunteer._id  %>/edit">Edit</a>
-      </div> -->
   </h2>
 
 
@@ -34,7 +30,7 @@
                 <p>
                   <%=volunteer.personalID%>
                 </p>
-                <span class="text-muted">Personal ID</span>
+                <span class="text-muted"><%= t('personal_ID') %> </span>
               </div>
             </div>
           </div>
@@ -44,7 +40,7 @@
                 <p>
                   <%=volunteer.licenseNR %>
                 </p>
-                <span class="text-muted">Drivers License</span>
+                <span class="text-muted"><%= t('drivers_license') %> </span>
               </div>
             </div>
           </div>
@@ -54,7 +50,7 @@
         <% if(volunteer.previousEmergencies.length) {%>
           <p>
             <a class="btn btn-sm btn-primary" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
-              Past Emergencies
+              <%= t('past_emergencies') %> 
             </a>
             <div class="collapse" id="collapseExample">
               <% for(let emergency of volunteer.previousEmergencies) {%>
@@ -63,8 +59,8 @@
                     <div class="fw-bold mb-2">
                       <div><%= emergency.emergencyDate.getDate() %>.<%= emergency.emergencyDate.getMonth()+1 %>.<%= emergency.emergencyDate.getFullYear() %></div>
                     </div>
-                     <span class="d-block">Street: <%= emergency.street %>  </span>
-                     <span class="text-muted">Description: <%= emergency.description %>  </span>
+                     <span class="d-block"><%= t('address') %>:  <%= emergency.street %>  </span>
+                     <span class="text-muted"><%= t('description') %>: <%= emergency.description %>  </span>
                   </div>
                   <div>
                     <span class="badge bg-secondary rounded-pill" style="font-size: 14px;"><%= emergency.city %></span>
@@ -83,7 +79,7 @@
         <div class="card-body row">
           <div class="col-12 border-bottom mb-2 pb-3">
             <div class="d-flex justify-content-center">
-              Joined since: <%=volunteer.registrationDate.getDate()%>.<%=volunteer.registrationDate.getMonth()+1%>.<%=volunteer.registrationDate.getFullYear()%>
+              <%= t('joined_since') %> : <%=volunteer.registrationDate.getDate()%>.<%=volunteer.registrationDate.getMonth()+1%>.<%=volunteer.registrationDate.getFullYear()%>
             </div>
           </div>
           <div class="col-6 border-end mt-2 pt-2">
@@ -92,7 +88,7 @@
                 <p>
                   <%=volunteer.phone%>
                 </p>
-                <span class="text-muted">Phone Number</span>
+                <span class="text-muted"><%= t('phone') %> </span>
               </div>
             </div>
           </div>
@@ -102,7 +98,7 @@
                 <p>
                   <%=volunteer.city%>, <%= volunteer.state.charAt(0).toUpperCase()+ volunteer.state.slice(1) %>
                 </p>
-                <span class="text-muted">City, State</span>
+                <span class="text-muted"><%= t('city') %>, <%= t('state') %> </span>
               </div>
             </div>
           </div>
@@ -111,27 +107,27 @@
 
      <div class="row ms-2">
       <% if(volunteer.isBusy) {%> 
-        <h4 class="text-muted mt-5"><%=volunteer.firstName%> is operating following emergency in:  </h4>
+        <h4 class="text-muted mt-5"><%=volunteer.firstName%> <%= t('operating_emergency') %>:  </h4>
         <div class="row">
           <div class="col-6 mt-3">
-            <span class="text-muted">Street:</span> <strong><%=volunteer.emergency[0].street %></strong>
+            <span class="text-muted"><%= t('address') %>:</span> <strong><%=volunteer.emergency[0].street %></strong>
           </div>
           <div class="col-6 mt-3">
-            <span class="text-muted">City:</span> <strong><%=volunteer.emergency[0].city %></strong>
+            <span class="text-muted"><%= t('city') %>:</span> <strong><%=volunteer.emergency[0].city %></strong>
           </div>
         </div>
         <div class="col-6 mt-3">
-          <span class="text-muted"></span> <span class="badge bg-danger"><a class="text-decoration-none text-white" href="/emergencies/<%=volunteer.emergency[0]._id%> ">+ Details</a></span>
+          <span class="text-muted"></span> <span class="badge bg-danger"><a class="text-decoration-none text-white" href="/emergencies/<%=volunteer.emergency[0]._id%> ">+ <%= t('details') %></a></span>
         </div>
         <div class="col-12 d-flex justify-content-end mt-3">
-          <button class="btn btn-sm btn-primary disabled" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Delete</button>
+          <button class="btn btn-sm btn-primary disabled" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><%= t('delete') %> </button>
         </div>
       <% }else{%>
          
         <div class="col-12 d-flex justify-content-end mt-3">
-        <a class="btn btn-sm btn-secondary me-4" href="/volunteers/<%=volunteer._id  %>/edit">Edit</a>
+        <a class="btn btn-sm btn-secondary me-4" href="/volunteers/<%=volunteer._id  %>/edit"><%= t('edit') %></a>
 
-          <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Delete</button>
+          <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><%= t('delete') %></button>
         </div>
       <% } %> 
      </div>
@@ -144,16 +140,16 @@
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="staticBackdropLabel">Warning!</h5>
+              <h5 class="modal-title" id="staticBackdropLabel"><%= t('WARNING') %>!</h5>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-              Do you really want to delete this record? This process cannot be undone!
+              <%= t('WARNING_DELETION') %> 
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">Cancel</button>
+              <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal"><%= t('cancel') %></button>
               <form class="d-inline" action="/volunteers/<%= volunteer._id%>?_method=DELETE" method="POST">
-                <button class="btn btn-sm btn-primary">Delete</button>
+                <button class="btn btn-sm btn-primary"><%= t('delete') %> </button>
               </form>
             </div>
           </div>

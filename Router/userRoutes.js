@@ -42,6 +42,7 @@ router.get('/greet', (req,res)=>{
 })
 
 router.get('/login', (req,res)=>{
+    if(req.isAuthenticated()) res.redirect('/');
     res.render('Users/login');
 });
 
