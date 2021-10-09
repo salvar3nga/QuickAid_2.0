@@ -30,5 +30,21 @@
     "delete": "Delete",
     "edit": "Edit",
     "WARNING": "Warning",
-    "WARNING_DELETION": "Do you really want to delete this record? This process cannot be undone!"
+    "WARNING_DELETION": "Do you really want to delete this record? This process cannot be undone!",
+    "new_emergency": "New Emergency",
+    "edit_emergency": "Edit Emergency",
+    "optional": "optional",
+    "emergency_description": "Emergency description",
+    "assign": "Assign",
+    "unassign": "Unassign",
+    "more_details": "More Details",
+    "created": "Created",
+    "time": "Time",
+    "assigned_to": "Assigned to",
+    "close_emergency": "Close emergency",
+    "WARNING_CLOSURE": "Are you sure you want to close this emergency? This process is not reversible!",
+    "choose_volunteer": "Choose Volunteer",
+    "all_emergencies": "All Emergencies",
+    "at": "at"
+    
 }

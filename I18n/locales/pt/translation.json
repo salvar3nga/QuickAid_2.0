@@ -30,8 +30,22 @@
     "delete": "Apagar",
     "edit": "Editar",
     "WARNING": "Aviso",
-    "WARNING_DELETION": "Quer mesmo apagar este registo? Este processo não pode ser desfeito!"
-   
-
+    "WARNING_DELETION": "Quer mesmo apagar este registo? Este processo não pode ser desfeito!",
+    "new_emergency": "Nova Emergência",
+    "edit_emergency": "Editar Emergência",
+    "optional": "opcional",
+    "emergency_description": "Descrição do acontecido",
+    "assign": "Atribuir",
+    "unassign": "Não atribuir",
+    "more_details": "Mais Detalhes",
+    "created": "Criado",
+    "time": "Hora",
+    "assigned_to": "Atribuido à",
+    "close_emergency": "Encerrar Emergência",
+    "WARNING_CLOSURE": "Tem a certeza de que quer encerrar esta emergência? Este processo não é reversível!",
+    "choose_volunteer": "Escolher Voluntário",
+    "all_emergencies": "Todas as Emergências",
+    "at": "as"
 
 }
+   

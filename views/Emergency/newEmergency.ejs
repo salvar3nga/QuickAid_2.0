@@ -30,33 +30,33 @@
 </style>
 
 <div class="row">
-    <h1 class="text-center mb-5">New Emergency</h1>
+    <h1 class="text-center mb-5"><%= t('new_emergency') %> </h1>
     <div class="col-6 offset-3">
      <form action="/emergencies" method="POST" novalidate class="form-validation">
          <div class="mb-3 position-relative suggestion">
-             <label class="form-label" for="city">City</label>
-             <input class="form-control" type="text" id="city" name="emergency[city]" placeholder="City" required>
+             <label class="form-label" for="city"><%= t('city') %> </label>
+             <input class="form-control" type="text" id="city" name="emergency[city]" placeholder="<%= t('city') %>" required>
              <div class="invalid-feedback">
                  Please provide a city.
              </div>
          </div>
          <div class="mb-3">
-             <label class="form-label" for="street">Street</label>
-             <input class="form-control" type="text" id="street" name="emergency[street]" placeholder="street" required>
+             <label class="form-label" for="street"><%= t('address') %></label>
+             <input class="form-control" type="text" id="street" name="emergency[street]" placeholder="<%= t('address') %>" required>
              <div class="invalid-feedback">
                  Please provide a street.
              </div>
          </div>
          <div class="mb-3">
-              <label class="form-label">Description <i>(optional)</i></label>
+              <label class="form-label"><%= t('description') %> <i>(<%= t('optional') %>)</i></label>
              <div class="form-floating">
                 <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 200px" name="emergency[description]"></textarea>
-                <label class="form-label" for="floatingTextarea2">Emergency description</label>
+                <label class="form-label" for="floatingTextarea2"><%= t('emergency_description') %></label>
               </div>
          </div>
          <div class="mb-3 d-flex justify-content-end">
-             <a class="btn btn-sm btn-secondary me-4" href="/emergencies">Cancel</a>
-             <button class="btn btn-sm btn-primary">Add</button>
+             <a class="btn btn-sm btn-secondary me-4" href="/emergencies"><%= t('cancel') %></a>
+             <button class="btn btn-sm btn-primary"><%= t('add') %></button>
          </div>
      </form>
  

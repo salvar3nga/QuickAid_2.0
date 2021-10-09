@@ -1,12 +1,12 @@
 <% layout('layouts/boilerplate') %>
 
 <div class="row">
-    <h1 class="text-center mb-5">Edit Emergency</h1>
+    <h1 class="text-center mb-5"><%= t('edit_emergency') %></h1>
     <div class="col-6 offset-3">
      <form action="/emergencies/<%=emergency._id%>?_method=PUT" method="POST" novalidate class="form-validation">
          <div class="mb-3">
-             <label class="form-label" for="name">City</label>
-             <input class="form-control" type="text" id="name" name="emergency[city]" placeholder="City" required value="<%= emergency.city %>">
+             <label class="form-label" for="name"><%= t('city') %></label>
+             <input class="form-control" type="text" id="name" name="emergency[city]" placeholder="<%= t('city') %>" required value="<%= emergency.city %>">
              <div class="invalid-feedback">
                  Please provide a valid city.
              </div>
@@ -15,26 +15,26 @@
              </div>
          </div>
          <div class="mb-3">
-             <label class="form-label" for="lastname">Street</label>
-             <input class="form-control" type="text" id="lastname" name="emergency[street]" placeholder="street" required value="<%= emergency.street %>">
+             <label class="form-label" for="lastname"><%= t('address') %></label>
+             <input class="form-control" type="text" id="lastname" name="emergency[street]" placeholder="<%= t('address') %>" required value="<%= emergency.street %>">
              <div class="invalid-feedback">
                  Please provide a valid street.
              </div>
          </div>
          <div class="mb-3">
-              <label class="form-label">Description (optional)</label>
+              <label class="form-label"><%= t('description') %> <i>(<%= t('optional') %>)</label>
              
              <div class="form-floating">
                 <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 200px" name="emergency[description]"><%= emergency.description%></textarea>
-                <label class="form-label" for="floatingTextarea2">Emergency description</label>
+                <label class="form-label" for="floatingTextarea2"><%= t('emergency_description') %></label>
               </div>
              <div class="invalid-feedback">
                  Please provide a valid phone number.
              </div>
          </div>
          <div class="mb-3 d-flex justify-content-end">
-             <a class="btn btn-sm btn-secondary me-4" href="/emergencies/<%=emergency._id%>">Cancel</a>
-             <button class="btn btn-sm btn-primary">Save</button>
+             <a class="btn btn-sm btn-secondary me-4" href="/emergencies/<%=emergency._id%>"><%= t('cancel') %></a>
+             <button class="btn btn-sm btn-primary"><%= t('save') %></button>
          </div>
      </form>
  
