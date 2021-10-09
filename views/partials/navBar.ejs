@@ -2,17 +2,12 @@
 <% if(currentUser) {%> 
 <nav class="navbar sticky-top navbar-expand-lg navbar-dark">
     <div class="container-fluid container">
-      <% if(currentUser) {%> 
         <a class="navbar-brand me-auto fw-bold fs-3" href="/volunteers">QuickAid</a>
-      <% }else{ %>
-        <a class="navbar-brand me-auto fw-bold fs-3" href="#">QuickAid</a>
-        <% } %>  
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
-          <% if(currentUser) {%> 
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
@@ -20,28 +15,27 @@
                 </svg>
               </a>
               <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <li><a class="dropdown-item" href="/emergencies/new">New Emergency</a></li>
-                <li><a class="dropdown-item" href="/volunteers/new">New Volunteer</a></li>
+                <li><a class="dropdown-item" href="/emergencies/new"><%= t('new_emergency') %></a></li>
+                <li><a class="dropdown-item" href="/volunteers/new"><%= t('new_volunteer') %></a></li>
                 <% if(currentUser.superAdmin){ %> 
-                  <li><a class="dropdown-item" href="/register">New User</a></li>
+                  <li><a class="dropdown-item" href="/register"><%= t('new_user') %></a></li>
                 <% } %> 
               </ul>
             </li>
             <li class="nav-item">
-              <a class="nav-link" aria-current="page" href="/emergencies">Emergencies</a>
+              <a class="nav-link" aria-current="page" href="/emergencies"><%= t('emergencies') %></a>
             </li>
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 <%= currentUser.username %>
               </a>
               <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <li><a class="dropdown-item" href="#">Account</a></li>
-                <li><a class="dropdown-item" href="#">All Users</a></li>
+                <li><a class="dropdown-item" href="#"><%= t('account') %></a></li>
+                <li><a class="dropdown-item" href="#"><%= t('all_users') %></a></li>
                 <!-- <li><hr class="dropdown-divider"></li> -->
-                <li><a class="dropdown-item" href="/logout">Logout <i class="fas fa-sign-out-alt"></i></a></li>
+                <li><a class="dropdown-item" href="/logout"><%= t('logout') %> <i class="fas fa-sign-out-alt"></i></a></li>
               </ul>
             </li>
-          <% } %> 
         </ul>
       </div>
     </div>

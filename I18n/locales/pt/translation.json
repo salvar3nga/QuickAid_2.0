@@ -45,7 +45,11 @@
     "WARNING_CLOSURE": "Tem a certeza de que quer encerrar esta emergência? Este processo não é reversível!",
     "choose_volunteer": "Escolher Voluntário",
     "all_emergencies": "Todas as Emergências",
-    "at": "as"
+    "at": "as",
+    "emergencies": "Emergências",
+    "account": "Conta",
+    "all_users": "Usuários",
+    "logout": "Sair"
 
 }
    

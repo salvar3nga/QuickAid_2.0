@@ -45,6 +45,10 @@
     "WARNING_CLOSURE": "Are you sure you want to close this emergency? This process is not reversible!",
     "choose_volunteer": "Choose Volunteer",
     "all_emergencies": "All Emergencies",
-    "at": "at"
+    "at": "at",
+    "emergencies": "Emergencies",
+    "account": "Account",
+    "all_users": "All Users",
+    "logout": "Logout"
     
 }
