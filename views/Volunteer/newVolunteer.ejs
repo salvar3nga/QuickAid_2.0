@@ -1,39 +1,39 @@
 <% layout('layouts/boilerplate') %>
     
 
-   <h1 class="text-center mb-5">New Volunteer</h1>
+   <h1 class="text-center mb-5"><%= t('new_volunteer') %> </h1>
 
    <form class="row g-3 mb-5 form-validation" action="/volunteers" method="POST" novalidate>
         <div class="col-md-6">
-            <label for="name" class="form-label">First Name</label>
-            <input type="text" class="form-control" id="name" name="volunteer[firstName]" placeholder="first name" required>
+            <label for="name" class="form-label"><%= t('first_name') %></label>
+            <input type="text" class="form-control" id="name" name="volunteer[firstName]" placeholder="<%= t('first_name') %>" required>
             <div class="invalid-feedback">
                 Please provide a name.
             </div>
         </div>
         <div class="col-md-6">
-            <label for="lastname" class="form-label">Last Name</label>
-            <input type="text" class="form-control" id="lastname" name="volunteer[lastName]" placeholder="last name" required>
+            <label for="lastname" class="form-label"><%= t('last_name') %></label>
+            <input type="text" class="form-control" id="lastname" name="volunteer[lastName]" placeholder="<%= t('last_name') %>" required>
             <div class="invalid-feedback">
                 Please provide a name.
             </div>
         </div>
         <div class="col-12">
-            <label for="inputAddress" class="form-label">Address</label>
+            <label for="inputAddress" class="form-label"><%= t('address') %></label>
             <input type="text" class="form-control" id="inputAddress" name="volunteer[address]" placeholder="1234 Main Str" required>
             <div class="invalid-feedback">
                 Please provide an address.
             </div>
         </div>
         <div class="col-md-6">
-            <label for="inputCity" class="form-label">City</label>
-            <input type="text" class="form-control" id="inputCity" name="volunteer[city]" placeholder="City" required >
+            <label for="inputCity" class="form-label"><%= t('city') %></label>
+            <input type="text" class="form-control" id="inputCity" name="volunteer[city]" placeholder="<%= t('city') %>" required >
             <div class="invalid-feedback">
                 Please provide a city.
             </div>
         </div>
         <div class="col-md-6">
-        <label for="inputState" class="form-label">State</label>
+        <label for="inputState" class="form-label"><%= t('state') %></label>
         <select id="inputState" class="form-select" name="volunteer[state]" required >
             <% for (state of states) {%> 
                 <option value="<%= state %>"><%= state.charAt(0).toUpperCase()+ state.slice(1) %></option>
@@ -42,29 +42,29 @@
         </select>
         </div>
         <div class="col-md-6">
-            <label for="inputPhone" class="form-label">Phone</label>
-            <input type="number" class="form-control" id="inputPhone" name="volunteer[phone]" placeholder="phone" required>
+            <label for="inputPhone" class="form-label"><%= t('phone') %></label>
+            <input type="number" class="form-control" id="inputPhone" name="volunteer[phone]" placeholder="<%= t('phone') %>" required>
             <div class="invalid-feedback">
                 Please provide phone number.
             </div>
         </div>
         <div class="col-md-6">
-            <label for="Birthday" class="form-label">Birthday</label>
-            <input type="date" class="form-control" id="Birthday" name="volunteer[birthday]" placeholder="birthday" required>
+            <label for="Birthday" class="form-label"><%= t('birthday') %></label>
+            <input type="date" class="form-control" id="Birthday" name="volunteer[birthday]" placeholder="<%= t('birthday') %>" required>
             <div class="invalid-feedback">
                 Please provide birthday.
             </div>
         </div>
         <div class="col-md-6">
-            <label for="inputID" class="form-label">Personal ID</label>
+            <label for="inputID" class="form-label"><%= t('personal_ID') %></label>
             <input type="text" class="form-control" id="inputID" name="volunteer[personalID]" placeholder="ID" required>
             <div class="invalid-feedback">
                 Please provide personal id.
             </div>
         </div>
         <div class="col-md-6">
-            <label for="inputLicense" class="form-label">Drivers-license</label>
-            <input type="text" class="form-control" id="inputLicense" name="volunteer[licenseNR]" placeholder="dirvers license" required>
+            <label for="inputLicense" class="form-label"><%= t('drivers_license') %></label>
+            <input type="text" class="form-control" id="inputLicense" name="volunteer[licenseNR]" placeholder="<%= t('drivers_license') %>" required>
             <div class="invalid-feedback">
                 Please provide an driver's license.
             </div>
@@ -79,7 +79,7 @@
         </div>
         </div> -->
         <div class="col-12 d-flex justify-content-end">
-            <a class="btn btn-sm btn-secondary me-4" href="/volunteers">Cancel</a>
-            <button class="btn btn-sm btn-primary">Add</button>
+            <a class="btn btn-sm btn-secondary me-4" href="/volunteers"><%= t('cancel') %> </a>
+            <button class="btn btn-sm btn-primary"><%= t('add') %> </button>
         </div>
   </form>

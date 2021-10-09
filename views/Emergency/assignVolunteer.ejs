@@ -1,11 +1,8 @@
 <% layout('layouts/boilerplate') %>
 <div class="d-flex">
   <div class="col">
-    <h1 class="border-bottom mb-5">Choose Volunteer</h1>
+    <h1 class="border-bottom mb-5"><%= t('choose_volunteer') %></h1>
   </div>
-  <!-- <div class="col d-flex justify-content-between">
-    <a class="btn btn-sm btn-info mb-5" href="/emergencies/<%= id %> ">Back</a>
-  </div> -->
 </div>
 
 
@@ -36,9 +33,9 @@
                       <h5 class="card-title"><%=v.firstName%> <%=v.lastName%></h5>
                       <span class="text-muted"><%= v.city %></span>
                     </div>
-                    <p class="card-text"><b>Tel:</b> <%= v.phone %> </p>
+                    <p class="card-text"><b><%= t('phone') %>:</b> <%= v.phone %> </p>
                   <form class="d-inline" action="/emergencies/<%=id%>/volunteers/<%=v._id%> " method="POST">
-                      <button class="btn btn-primary disabled">Assign</button>
+                      <button class="btn btn-sm btn-primary disabled"><%= t('assign') %></button>
                   </form>
                 </div> 
               </div>
@@ -51,9 +48,9 @@
                 <h5 class="card-title"><%=v.firstName%> <%=v.lastName%></h5>
                 <span class="text-muted"><%= v.city %></span>
               </div>
-              <p class="card-text"><b>Tel:</b> <%= v.phone %> </p>
+              <p class="card-text"><b><%= t('phone') %></b> <%= v.phone %> </p>
               <form class="d-inline" action="/emergencies/<%=id%>/volunteers/<%=v._id%> " method="POST">
-                  <button class="btn btn-sm btn-primary">Assign</button>
+                  <button class="btn btn-sm btn-primary"><%= t('assign') %></button>
               </form>
             </div> 
           </div>

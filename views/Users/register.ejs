@@ -1,51 +1,51 @@
 <% layout('layouts/boilerplate') %>
 
-<h1 class="text-center mb-5">New User</h1>
+<h1 class="text-center mb-5"><%= t('new_user') %> </h1>
 <div class="col-6 offset-3">
     
     <form class="row g-3 mb-5 form-validation" action="/register" method="POST" novalidate>
          <div class="col-md-12">
-             <label for="name" class="form-label">Name</label>
-             <input type="text" class="form-control" id="name" name="name" placeholder="name" required>
+             <label for="name" class="form-label"><%= t('name') %></label>
+             <input type="text" class="form-control" id="name" name="name" placeholder="<%= t('name') %>" required>
              <div class="invalid-feedback">
                  Please provide a name.
              </div>
          </div>
          <div class="col-md-12">
-             <label for="username" class="form-label">Username (for login)</label>
+             <label for="username" class="form-label"><%= t('username') %> </label>
              <input type="text" class="form-control" id="username" name="username" placeholder="u_name" required>
              <div class="invalid-feedback">
                  Please provide a name.
              </div>
          </div>
          <div class="col-md-12">
-            <label for="inputPhone" class="form-label">Phone</label>
-            <input type="number" class="form-control" id="inputPhone" name="phone" placeholder="phone">
+            <label for="inputPhone" class="form-label"><%= t('phone') %></label>
+            <input type="number" class="form-control" id="inputPhone" name="phone" placeholder="<%= t('phone') %>">
         </div>
          <div class="col-12">
-             <label for="inputAddress" class="form-label">Address</label>
+             <label for="inputAddress" class="form-label"><%= t('address') %></label>
              <input type="text" class="form-control" id="inputAddress" name="address" placeholder="1234 Main Str">
              <div class="invalid-feedback">
                  Please provide an address.
              </div>
          </div>
          <div class="col-md-12">
-             <label for="inputCity" class="form-label">City</label>
-             <input type="text" class="form-control" id="inputCity" name="city" placeholder="City">
+             <label for="inputCity" class="form-label"><%= t('city') %></label>
+             <input type="text" class="form-control" id="inputCity" name="city" placeholder="<%= t('city') %>">
              <div class="invalid-feedback">
                  Please provide a city.
              </div>
          </div>
          <div class="col-md-12">
-             <label for="password" class="form-label">Password (for login)</label>
-             <input type="password" class="form-control" id="password" name="password" placeholder="password" required>
+             <label for="password" class="form-label"><%= t('password') %></label>
+             <input type="password" class="form-control" id="password" name="password" placeholder="<%= t('password') %>" required>
              <div class="invalid-feedback">
                  Please provide a password.
              </div>
          </div>
          <div class="col-md-12">
-             <label for="passwordRepeat" class="form-label">Confirm Password</label>
-             <input type="password" class="form-control" id="passwordRepeat" name="passwordRepeat" placeholder="confirm password" required>
+             <label for="passwordRepeat" class="form-label"><%= t('confirm_password') %></label>
+             <input type="password" class="form-control" id="passwordRepeat" name="passwordRepeat" placeholder="<%= t('confirm_password') %>" required>
              <div class="invalid-feedback">
                  Please provide the same as above password.
              </div>
@@ -54,13 +54,13 @@
          <div class="form-check">
              <input class="form-check-input" type="checkbox" id="superAdmin" name="superAdmin">
              <label class="form-check-label" for="superAdmin">
-             Is Super-Admin?
+                <%= t('is_super_admin') %>?
              </label>
          </div>
          </div>
          <div class="col-12 d-flex justify-content-end">
-             <a class="btn btn-sm btn-secondary me-4" href="/volunteers">Cancel</a>
-             <button class="btn btn-sm btn-primary">Add</button>
+             <a class="btn btn-sm btn-secondary me-4" href="/volunteers"><%= t('cancel') %></a>
+             <button class="btn btn-sm btn-primary"><%= t('add') %></button>
          </div>
     </form>
 </div>

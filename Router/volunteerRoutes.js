@@ -32,7 +32,7 @@ const states = [
     'oio', 'quinara', 'tombali'];
 
    
-// VOLUNTEER ROUTES
+
 router.get("/", (req, res)=>{
 
     res.redirect('/volunteers')
@@ -48,7 +48,7 @@ router.get('/volunteers', isLoggedIn, catchAsync(async (req,res)=>{
 // Form to create a new volunteer
 router.get('/volunteers/new', isLoggedIn, (req,res)=>{
     if(!req.isAuthenticated()){
-        req.flash('error', 'Something went wrong, please sign in!')
+        req.flash('error', req.t('ERROR_SOMETHING_WRONG'))
         return res.redirect('/login');
     }
     res.render('Volunteer/newVolunteer', {states});
@@ -61,7 +61,7 @@ router.post('/volunteers', isLoggedIn, validateVolunteer, catchAsync(async (req,
     
     await newVolunteer.save();
 
-    req.flash('success', 'Successfully created a new volunteer');
+    req.flash('success', req.t('SUCCESS_CREATED_VOLUNTEER'));
 
     res.redirect(`/volunteers/${newVolunteer._id}`);
 
@@ -71,16 +71,6 @@ router.post('/volunteers', isLoggedIn, validateVolunteer, catchAsync(async (req,
 router.get('/volunteers/:id', isLoggedIn, catchAsync(async(req,res)=>{
     const {id} = req.params;
 
-    // const volunteer = await Volunteer.findById(id).populate('emergency');
-
-    // if(!volunteer){
-    //     req.flash('error', 'Volunteer not found');
-    //     res.redirect('/volunteers');    
-    // }else{
-    //     res.render('Volunteer/volunteerDetails', {volunteer});
-    // }
-
-
     try{
         const volunteer = await Volunteer.findById(id)
         .populate('emergency')
@@ -88,7 +78,7 @@ router.get('/volunteers/:id', isLoggedIn, catchAsync(async(req,res)=>{
 
         res.render('Volunteer/volunteerDetails', {volunteer});
     }catch(err){
-        req.flash('error', 'Volunteer not found');
+        req.flash('error', req.t('ERROR_VOLUNTEER_NOT_FOUND'));
         res.redirect('/volunteers');    
 
     }
@@ -104,7 +94,6 @@ router.get('/volunteers/:id/edit', isLoggedIn, catchAsync(async (req,res)=>{
     res.render('Volunteer/editVolunteer', {volunteer, states});
 }));
 
-/* PUT and DELETE REQUESTS ARE CURRENTLY SERVED ON INDEX JS */
 
 router.put('/volunteers/:id', isLoggedIn, catchAsync(async (req, res, next) =>{
     const {id} = req.params;
@@ -112,11 +101,11 @@ router.put('/volunteers/:id', isLoggedIn, catchAsync(async (req, res, next) =>{
     try{
         const updatedVolunteer = await Volunteer.findByIdAndUpdate(id, {...req.body.volunteer})
 
-        req.flash('success', 'Successfully updated volunteer');
+        req.flash('success', req.t('SUCCESS_UPDATED_VOLUNTEER'));
     
         res.redirect(`/volunteers/${updatedVolunteer._id}`);
     }catch(err){
-        req.flash('error', 'Volunteer not found');
+        req.flash('error', req.t('ERROR_VOLUNTEER_NOT_FOUND'));
         res.redirect('/volunteers');    
 
     }
@@ -127,8 +116,6 @@ router.put('/volunteers/:id', isLoggedIn, catchAsync(async (req, res, next) =>{
 router.delete('/volunteers/:id', isLoggedIn, catchAsync(async (req,res)=>{
     const {id} = req.params;
 
-
-    //TODO: Delete all previous emergencies as well
     
     const deletedVolunteer = await Volunteer.findByIdAndDelete(id);
 

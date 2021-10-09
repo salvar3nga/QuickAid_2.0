@@ -12,6 +12,8 @@ router.use(methodOverride('_method'));
 
 
 router.get('/register', isLoggedIn, (req,res)=>{
+
+
     res.render('Users/register');
 });
 
@@ -24,8 +26,7 @@ router.post('/register', isLoggedIn, verifyPasswordMatching, catchAsync(async(re
         
         const newAdmin = new User({name, username, phone, address, city, superAdmin});
         const registeredUser = await User.register(newAdmin, password)
-        console.log(registeredUser);
-        req.flash('success', 'Successfully created a new user')
+        req.flash('success', req.t('SUCCESS_CREATED_USER'))
         res.redirect('/volunteers');
     }catch(err){
         req.flash('error', err.message);
@@ -35,6 +36,7 @@ router.post('/register', isLoggedIn, verifyPasswordMatching, catchAsync(async(re
 
 
 router.get('/login', (req,res)=>{
+    if(req.isAuthenticated()) res.redirect('/');
     res.render('Users/login');
 });
 
