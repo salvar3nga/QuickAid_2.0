@@ -49,6 +49,16 @@
     "emergencies": "Emergencies",
     "account": "Account",
     "all_users": "All Users",
-    "logout": "Logout"
+    "logout": "Logout",
+    "ERROR_SOMETHING_WRONG": "Something went wrong, please sign in!",
+    "ERROR_VOLUNTEER_NOT_FOUNG": "Volunteer not found",
+    "SUCCESS_UPDATED_VOLUNTEER": "Successfully updated volunteer",
+    "SUCCESS_CREATED_VOLUNTEER": "Successfully created a new volunteer",
+    "SUCCESS_CREATED_USER": "Successfully created a new user",
+    "SUCCESS_CREATED_EMERGENCY": "Successfully created a new emergency",
+    "SUCCESS_ASSIGNED_EMERGENCY": "Successfully assigned",
+    "SUCCESS_UNASSIGNED_EMERGENCY": "Successfully unassigned",
+    "SUCCESS_UPDATED_EMERGENCY": "Successfully updated emergency"
+
     
 }

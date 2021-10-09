@@ -49,7 +49,16 @@
     "emergencies": "Emergências",
     "account": "Conta",
     "all_users": "Usuários",
-    "logout": "Sair"
+    "logout": "Sair",
+    "ERROR_SOMETHING_WRONG": "Ops algo deu errado, por favor queira iniciar sessão!",
+    "ERROR_VOLUNTEER_NOT_FOUNG": "Voluntário não encontrado",
+    "SUCCESS_UPDATED_VOLUNTEER": "Voluntário atualizado",
+    "SUCCESS_CREATED_VOLUNTEER": "Voluntário criado",
+    "SUCCESS_CREATED_USER": "Usuário Voluntário",
+    "SUCCESS_CREATED_EMERGENCY": "Emergência criada",
+    "SUCCESS_ASSIGNED_EMERGENCY": "Atribuido com sucesso",
+    "SUCCESS_UNASSIGNED_EMERGENCY": "Usuário removido da emergência",
+    "SUCCESS_UPDATED_EMERGENCY": "Emergência atualizada"
 
 }
    

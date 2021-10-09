@@ -64,6 +64,8 @@ body{
     border-color: var(--clr-accent-primary);
     pointer-events: none;
     opacity: .65;
+    cursor: not-allowed;
+
 }
 
 .btn-primary{
@@ -86,6 +88,7 @@ body{
     border-color: var(--clr-accent-primary);
     pointer-events: none;
     opacity: .65;
+    cursor: not-allowed;
 }
 .btn-secondary{
     color: var(--clr-accent-primary);

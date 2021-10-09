@@ -46,7 +46,7 @@ router.post("/emergencies", isLoggedIn, async (req, res)=>{
     emergency.location = geoData.body.features[0].geometry;
     await emergency.save();
 
-    req.flash('success', 'Successfully created an emergency');
+    req.flash('success', req.t('SUCCESS_CREATED_EMERGENCY'));
 
     res.redirect(`/emergencies/${emergency._id}`);
 });
@@ -106,7 +106,7 @@ router.post("/emergencies/:id/volunteers/:vol_id", isLoggedIn, async (req, res)=
     await emergency.save();
     await volunteer.save();
 
-    req.flash('success', 'Successfully assigned');
+    req.flash('success', req.t('SUCCESS_ASSIGNED_EMERGENCY'));
 
 
     res.redirect(`/emergencies/${emergency._id}`);
@@ -117,6 +117,9 @@ router.put('/emergencies/:id', isLoggedIn, catchAsync(async(req,res, next)=>{
     const {id} = req.params;
 
     const updatedEmergency = await Emergency.findByIdAndUpdate(id, {...req.body.emergency});
+
+    req.flash('success', req.t('SUCCESS_UPDATED_EMERGENCY'));
+
     
     res.redirect(`/emergencies/${updatedEmergency._id}`);
 }));
@@ -133,6 +136,8 @@ router.put('/emergencies/:id/volunteers/:vol_id', isLoggedIn, catchAsync(async(r
     
     await emergency.save();
     await updatedVolunteer.save();
+
+    req.flash('success', req.t('SUCCESS_UNASSIGNED_EMERGENCY'));
 
 
     res.redirect(`/emergencies/${emergency._id}`);

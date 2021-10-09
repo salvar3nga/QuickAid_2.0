@@ -26,7 +26,7 @@ router.post('/register', isLoggedIn, verifyPasswordMatching, catchAsync(async(re
         
         const newAdmin = new User({name, username, phone, address, city, superAdmin});
         const registeredUser = await User.register(newAdmin, password)
-        req.flash('success', 'Successfully created a new user')
+        req.flash('success', req.t('SUCCESS_CREATED_USER'))
         res.redirect('/volunteers');
     }catch(err){
         req.flash('error', err.message);
@@ -34,12 +34,6 @@ router.post('/register', isLoggedIn, verifyPasswordMatching, catchAsync(async(re
     }
 }));
 
-router.get('/greet', (req,res)=>{
-    const language = req.language;
-    // const greeting = res.__('goodMorning')
-    const response = req.t('goodMorning');
-    res.send(response);
-})
 
 router.get('/login', (req,res)=>{
     if(req.isAuthenticated()) res.redirect('/');
